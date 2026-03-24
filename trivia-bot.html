@@ -121,21 +121,21 @@
 
         <section class="project-details">
             <h2>Resumen del Proyecto</h2>
-            <p>Este proyecto (desarrollado como entrega final para el curso "AI Automation" de Coderhouse) consiste en un workflow automatizado en <strong>n8n</strong> que opera un juego de trivia a través de Telegram[cite: 1, 3, 6]. Para manejar la imprevisibilidad de las respuestas humanas, el sistema utiliza una arquitectura híbrida: combina expresiones regulares para interactuar con botones de interfaz y <strong>Modelos de Lenguaje (Llama 3 vía Groq)</strong> para evaluar semánticamente el texto libre enviado por el usuario[cite: 9, 11]. El estado de las partidas y el inventario de preguntas se administran de forma persistente utilizando Google Sheets como base de datos[cite: 8].</p>
+            <p>Este proyecto (desarrollado como entrega final para el curso "AI Automation" de Coderhouse) consiste en un workflow automatizado en <strong>n8n</strong> que opera un juego de trivia a través de Telegram. Para manejar la imprevisibilidad de las respuestas humanas, el sistema utiliza una arquitectura híbrida: combina expresiones regulares para interactuar con botones de interfaz y <strong>Modelos de Lenguaje (Llama 3 vía Groq)</strong> para evaluar semánticamente el texto libre enviado por el usuario. El estado de las partidas y el inventario de preguntas se administran de forma persistente utilizando Google Sheets como base de datos.</p>
             
             <h3>Arquitectura y Módulos Clave:</h3>
             <ul>
-                <li><strong>Enrutamiento Inteligente (Orquestador LLM):</strong> Cuando el usuario escribe texto libre, un modelo LLM deduce la intención (responder, jugar, reglas o reprender) y devuelve un JSON estructurado para enrutar el flujo[cite: 11, 12].</li>
-                <li><strong>Anfitrión IA Sarcástico (Interacción LLM):</strong> Si el usuario envía mensajes fuera de contexto, la rama "reprender" alimenta a un segundo LLM con el estado de la partida actual. Este redacta una respuesta dinámica y sarcástica (estilo porteño) para encarrilar al usuario de vuelta al juego[cite: 13, 14, 15].</li>
-                <li><strong>Lógica de Juego Matemática:</strong> El flujo configura vidas y multiplicadores de puntaje dinámicos según la dificultad elegida[cite: 33, 35]. Evalúa respuestas, actualiza el progreso y limpia la interfaz borrando botoneras obsoletas de Telegram en tiempo real[cite: 35, 36].</li>
-                <li><strong>Ingesta de Datos y Analítica:</strong> Unificación de datos desde Telegram y múltiples hojas de cálculo mediante nodos de código. Además, se registra un log histórico por cada respuesta procesada para métricas de Business Intelligence[cite: 20, 21, 37, 38].</li>
+                <li><strong>Enrutamiento Inteligente (Orquestador LLM):</strong> Cuando el usuario escribe texto libre, un modelo LLM deduce la intención (responder, jugar, reglas o reprender) y devuelve un JSON estructurado para enrutar el flujo.</li>
+                <li><strong>Anfitrión IA Sarcástico (Interacción LLM):</strong> Si el usuario envía mensajes fuera de contexto, la rama "reprender" alimenta a un segundo LLM con el estado de la partida actual. Este redacta una respuesta dinámica y sarcástica (estilo porteño) para encarrilar al usuario de vuelta al juego.</li>
+                <li><strong>Lógica de Juego Matemática:</strong> El flujo configura vidas y multiplicadores de puntaje dinámicos según la dificultad elegida. Evalúa respuestas, actualiza el progreso y limpia la interfaz borrando botoneras obsoletas de Telegram en tiempo real.</li>
+                <li><strong>Ingesta de Datos y Analítica:</strong> Unificación de datos desde Telegram y múltiples hojas de cálculo mediante nodos de código. Además, se registra un log histórico por cada respuesta procesada para métricas de Business Intelligence.</li>
             </ul>
 
             <h3>Buenas Prácticas Aplicadas:</h3>
             <ul>
                 <li><strong>Prevención "Anti-Zombie" (Idempotencia):</strong> Verificación estricta que cruza el ID del botón presionado contra el ID de la base de datos, previniendo fallos por doble contabilización si un usuario presiona botones viejos.</li>
-                <li><strong>Control de Sesión (Time-To-Live):</strong> Evaluación de timestamps para limpiar variables de estado si una partida supera las 24 horas de inactividad[cite: 25].</li>
-                <li><strong>Tolerancia a Fallos (Error Handling):</strong> Nodos configurados con políticas de reintento y continuación en caso de caídas de APIs externas, junto con notificaciones automáticas de mantenimiento al usuario[cite: 22].</li>
+                <li><strong>Control de Sesión (Time-To-Live):</strong> Evaluación de timestamps para limpiar variables de estado si una partida supera las 24 horas de inactividad.</li>
+                <li><strong>Tolerancia a Fallos (Error Handling):</strong> Nodos configurados con políticas de reintento y continuación en caso de caídas de APIs externas, junto con notificaciones automáticas de mantenimiento al usuario.</li>
                 <li><strong>Filtrado de Carga Útil:</strong> Validación nativa para ignorar envíos de imágenes, audios o stickers, asegurando que los nodos de procesamiento LLM solo operen con texto válido.</li>
             </ul>
         </section>
