@@ -1,109 +1,137 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Germán Rein | Portafolio de Datos</title>
-    <style>
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Germán Rein | Portafolio de Datos</title> <style>
+        /* =========================================
+           INICIO DE LOS ESTILOS (CSS)
+           Acá le damos color, forma y tamaño a las cosas
+           ========================================= */
+        
+        /* ESTILOS GENERALES DE LA PÁGINA */
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
+            font-family: Arial, sans-serif; /* Tipo de letra principal */
+            line-height: 1.6; /* Espacio entre las líneas de texto para que sea más legible */
+            margin: 0; /* Quita el margen blanco que los navegadores ponen por defecto */
             padding: 0;
-            color: #333;
-            background-color: #f4f4f4;
+            color: #333; /* Un gris muy oscuro para el texto (cansa menos la vista que el negro puro) */
+            background-color: #f4f4f4; /* Un fondo gris clarito para toda la web */
         }
+
+        /* EL ENCABEZADO SUPERIOR (La franja oscura arriba de todo) */
         header {
-            background: #2c3e50;
-            color: #fff;
-            padding: 3rem 0;
-            text-align: center;
+            background: #2c3e50; /* Color azul oscuro/grisáceo */
+            color: #fff; /* Texto blanco */
+            padding: 3rem 0; /* Espacio interno arriba y abajo para que no quede apretado */
+            text-align: center; /* Centra el texto */
         }
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 2.5rem; /* Tamaño grande para tu nombre */
         }
         header p {
             margin-top: 10px;
             font-size: 1.1rem;
-            color: #bdc3c7;
+            color: #bdc3c7; /* Un gris claro para tu subtítulo */
         }
+
+        /* EL CONTENEDOR PRINCIPAL */
         .container {
-            width: 80%;
-            max-width: 1000px;
-            margin: auto;
+            width: 80%; /* Ocupa el 80% del ancho de la pantalla */
+            max-width: 1000px; /* Pero nunca va a ser más ancho que 1000 píxeles */
+            margin: auto; /* Centra el contenedor en el medio de la pantalla */
             overflow: hidden;
-            padding: 30px 0;
-        }
-        .skills {
-            background: #fff;
-            padding: 25px;
-            margin-bottom: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 30px 0; /* Espacio arriba y abajo de la zona de contenido */
         }
         
-        /* DISEÑO DE TARJETAS DE PROYECTO */
+        /* SECCIÓN SKILLS Y PERFIL (Tu introducción) */
+        .skills {
+            background: #fff; /* Fondo blanco para crear una "tarjeta" */
+            padding: 25px; /* Espacio interno */
+            margin-bottom: 40px; /* Separa esta tarjeta de los proyectos que vienen abajo */
+            border-radius: 8px; /* Redondea las esquinas de la tarjeta */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Crea una sombra suave debajo de la tarjeta */
+        }
+        .skills h2 {
+            margin-top: 0;
+            color: #2c3e50; /* Título en el mismo azul del encabezado */
+        }
+        .profile-text {
+            margin-bottom: 25px; 
+            border-bottom: 1px solid #eee; /* Dibuja una línea finita gris abajo de tu perfil */
+            padding-bottom: 20px;
+            text-align: justify; /* Hace que el texto quede parejo en ambos márgenes */
+        }
+        /* Ajuste de interlineado para el stack tecnológico */
+        .skills p {
+            margin-bottom: 8px; /* Acá achicamos el espacio entre los renglones de las herramientas */
+        }
+        
+        /* DISEÑO DE LAS TARJETAS DE LOS PROYECTOS */
         .project-card {
-            display: flex;
-            gap: 25px;
+            display: flex; /* Flexbox: pone la imagen y el texto uno al lado del otro */
+            gap: 25px; /* Espacio entre la imagen y el texto */
             background: #fff;
             padding: 25px;
             margin-bottom: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            align-items: flex-start;
-            border-left: 5px solid #3498db;
+            align-items: flex-start; /* Alinea los elementos arriba */
+            border-left: 5px solid #3498db; /* Una línea azul decorativa a la izquierda de la tarjeta */
         }
         .project-img {
-            width: 300px;
-            height: 200px;
-            object-fit: cover;
+            width: 300px; /* Ancho fijo para todas las imágenes de proyectos */
+            height: 200px; /* Alto fijo */
+            object-fit: cover; /* Recorta la imagen para que llene el espacio sin deformarse */
             border-radius: 5px;
             border: 1px solid #eee;
-            background-color: #e9ecef; /* Color de fondo por si la imagen tarda en cargar */
+            background-color: #e9ecef; /* Color gris de fondo por si la foto tarda en cargar */
         }
         .project-content {
-            flex: 1;
+            flex: 1; /* Le dice al texto que ocupe todo el espacio sobrante a la derecha de la imagen */
         }
         .project-content h2 {
             margin-top: 0;
             color: #2c3e50;
             font-size: 1.5rem;
         }
+
+        /* ETIQUETAS (Las "píldoras" que dicen Tableau, Python, etc.) */
         .tag {
             display: inline-block;
-            background: #eee;
-            color: #555;
-            padding: 4px 10px;
+            background: #eee; /* Fondo gris claro */
+            color: #555; /* Texto gris oscuro */
+            padding: 4px 10px; /* Espacio adentro de la pildorita */
             border-radius: 4px;
-            font-size: 0.85rem;
+            font-size: 0.85rem; /* Letra un poco más chica */
             font-weight: bold;
             margin-bottom: 12px;
             margin-right: 5px;
         }
+
+        /* BOTONES DE ENLACE ("Ver Análisis Completo") */
         .btn-link {
             display: inline-block;
             margin-top: 15px;
             padding: 10px 18px;
-            background-color: #3498db;
-            color: white;
-            text-decoration: none;
+            background-color: #3498db; /* Azul claro */
+            color: white; /* Texto del botón en blanco */
+            text-decoration: none; /* Le saca el subrayado típico de los links */
             border-radius: 4px;
             font-weight: bold;
-            transition: background 0.3s;
+            transition: background 0.3s; /* Hace que el cambio de color al pasar el mouse sea suave (0.3 segundos) */
         }
         .btn-link:hover {
-            background-color: #2980b9;
+            background-color: #2980b9; /* Cuando pasás el mouse por arriba, el botón se vuelve un azul más oscuro */
         }
 
-        /* Responsividad para móviles */
+        /* RESPONSIVIDAD (Cómo se ve en celulares) */
         @media (max-width: 768px) {
+            /* Si la pantalla mide menos de 768px (celular o tablet chica), aplicá esto: */
             .project-card {
-                flex-direction: column;
+                flex-direction: column; /* Apila las cosas verticalmente (imagen arriba, texto abajo) */
             }
             .project-img {
-                width: 100%;
+                width: 100%; /* La imagen pasa a ocupar todo el ancho disponible */
                 height: auto;
             }
         }
@@ -116,8 +144,14 @@
     </header>
     
     <div class="container">
+        
         <section class="skills">
-            <h2>Stack Tecnológico</h2>
+            <h2>Perfil Profesional y Stack Tecnológico</h2>
+            
+            <div class="profile-text">
+                <p>Ingeniero Industrial con perfil proactivo, orientado a la mejora continua y a la Excelencia Operacional. Me especializo en la <strong>recopilación, limpieza e interpretación de datos</strong> para identificar oportunidades de optimización en procesos y flujos de negocio. Experto en el desarrollo de procesos ETL y automatizaciones utilizando Power BI, Power Query y SQL. Cuento con sólida experiencia colaborando en entornos dinámicos y equipos multidisciplinarios, traduciendo <em>insights</em> complejos en acciones estratégicas. <strong>Nivel de Inglés: Avanzado.</strong></p>
+            </div>
+
             <p><strong>Análisis y ETL:</strong> SQL, Python, Power Query.</p>
             <p><strong>Visualización:</strong> Tableau, Power BI, Excel Avanzado.</p>
             <p><strong>Automatización:</strong> n8n, VBA.</p>
@@ -140,34 +174,27 @@
 
         <div class="project-card">
             <img src="placeholder-ml.png" alt="Gráfico de Machine Learning" class="project-img">
-            
             <div class="project-content">
                 <span class="tag">Machine Learning</span>
                 <span class="tag">Python</span>
-                
                 <h2>Modelo Predictivo 1 (Título a definir)</h2>
                 <p><strong>El Desafío:</strong> Breve descripción del problema de negocio a resolver.</p>
                 <p><strong>El Resultado:</strong> Impacto del modelo o métrica de precisión alcanzada.</p>
-                
                 <a href="#" class="btn-link">Ver Documentación (Próximamente) ➔</a>
             </div>
         </div>
 
         <div class="project-card">
             <img src="placeholder-ml2.png" alt="Gráfico de Machine Learning" class="project-img">
-            
             <div class="project-content">
                 <span class="tag">Machine Learning</span>
                 <span class="tag">Python</span>
-                
                 <h2>Modelo Predictivo 2 (Título a definir)</h2>
                 <p><strong>El Desafío:</strong> Breve descripción del problema de negocio a resolver.</p>
                 <p><strong>El Resultado:</strong> Impacto del modelo o métrica de precisión alcanzada.</p>
-                
                 <a href="#" class="btn-link">Ver Documentación (Próximamente) ➔</a>
             </div>
         </div>
 
-    </div>
-</body>
+    </div> </body>
 </html>
