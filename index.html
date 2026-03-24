@@ -16,31 +16,96 @@
         header {
             background: #2c3e50;
             color: #fff;
-            padding: 2rem 0;
+            padding: 3rem 0;
             text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #bdc3c7;
         }
         .container {
             width: 80%;
+            max-width: 1000px;
             margin: auto;
             overflow: hidden;
-            padding: 20px;
+            padding: 30px 0;
         }
-        .skills, .project {
+        .skills {
             background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* DISEÑO DE TARJETAS DE PROYECTO */
+        .project-card {
+            display: flex;
+            gap: 25px;
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            align-items: flex-start;
+            border-left: 5px solid #3498db;
+        }
+        .project-img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
             border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+            background-color: #e9ecef; /* Color de fondo por si la imagen tarda en cargar */
+        }
+        .project-content {
+            flex: 1;
+        }
+        .project-content h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+        .tag {
+            display: inline-block;
+            background: #eee;
+            color: #555;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            margin-right: 5px;
         }
         .btn-link {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background-color: #3498db;
+            color: white;
             text-decoration: none;
-            color: #3498db;
+            border-radius: 4px;
             font-weight: bold;
+            transition: background 0.3s;
         }
         .btn-link:hover {
-            text-decoration: underline;
+            background-color: #2980b9;
+        }
+
+        /* Responsividad para móviles */
+        @media (max-width: 768px) {
+            .project-card {
+                flex-direction: column;
+            }
+            .project-img {
+                width: 100%;
+                height: auto;
+            }
         }
     </style>
 </head>
@@ -49,6 +114,7 @@
         <h1>Germán Rein</h1>
         <p>Ingeniero Industrial | Analista de Datos y Optimización de Procesos</p>
     </header>
+    
     <div class="container">
         <section class="skills">
             <h2>Stack Tecnológico</h2>
@@ -57,23 +123,51 @@
             <p><strong>Automatización:</strong> n8n, VBA.</p>
         </section>
         
-        <section class="project">
-            <h2>Proyecto 1: Análisis Regional de Game Delivery</h2>
-            <p>Dashboard interactivo diseñado para diagnosticar causas raíz de márgenes operativos negativos a nivel estatal y de clientes.</p>
-            <a href="game-delivery.html" class="btn-link">Ver Análisis Completo ➔</a>
-        </section>
-        
-        <section class="project">
-            <h2>Proyecto 2: Análisis Estadístico de Estabilidad de Procesos</h2>
-            <p>Análisis de distribuciones de peso y cálculo de intervalos de confianza utilizando Python.</p>
-            <a href="#" class="btn-link">Ver análisis completo en formato reporte (Próximamente) ➔</a>
-        </section>
-        
-        <section class="project">
-            <h2>Proyecto 3: Automatización de Flujos de Datos</h2>
-            <p>Diseño de arquitectura ETL para la limpieza y transformación de datos corporativos.</p>
-            <a href="#" class="btn-link">Ver documentación del flujo (Próximamente) ➔</a>
-        </section>
+        <div class="project-card">
+            <img src="thumb-gamedelivery.png" alt="Dashboard de Game Delivery" class="project-img">
+            
+            <div class="project-content">
+                <span class="tag">Inteligencia de Negocios</span>
+                <span class="tag">Tableau</span>
+                
+                <h2>Diagnóstico de Rentabilidad: Game Delivery</h2>
+                <p><strong>El Desafío:</strong> Identificar por qué sucursales con alto volumen de ventas operaban con márgenes negativos.</p>
+                <p><strong>El Resultado:</strong> A través de un Análisis Exploratorio de Datos (EDA), se detectaron -$4.2K de pérdidas ocultas por políticas de precios destructivas en Carolina del Norte y cuellos de botella logísticos en Texas.</p>
+                
+                <a href="game-delivery.html" class="btn-link">Ver Análisis Completo ➔</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="placeholder-ml.png" alt="Gráfico de Machine Learning" class="project-img">
+            
+            <div class="project-content">
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Python</span>
+                
+                <h2>Modelo Predictivo 1 (Título a definir)</h2>
+                <p><strong>El Desafío:</strong> Breve descripción del problema de negocio a resolver.</p>
+                <p><strong>El Resultado:</strong> Impacto del modelo o métrica de precisión alcanzada.</p>
+                
+                <a href="#" class="btn-link">Ver Documentación (Próximamente) ➔</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <img src="placeholder-ml2.png" alt="Gráfico de Machine Learning" class="project-img">
+            
+            <div class="project-content">
+                <span class="tag">Machine Learning</span>
+                <span class="tag">Python</span>
+                
+                <h2>Modelo Predictivo 2 (Título a definir)</h2>
+                <p><strong>El Desafío:</strong> Breve descripción del problema de negocio a resolver.</p>
+                <p><strong>El Resultado:</strong> Impacto del modelo o métrica de precisión alcanzada.</p>
+                
+                <a href="#" class="btn-link">Ver Documentación (Próximamente) ➔</a>
+            </div>
+        </div>
+
     </div>
 </body>
 </html>
