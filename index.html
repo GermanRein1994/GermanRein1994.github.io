@@ -25,25 +25,22 @@
             overflow: hidden;
             padding: 20px;
         }
-        .skills {
+        .skills, .project {
             background: #fff;
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
-        .project {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        .btn-link {
+            display: inline-block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
         }
-        .iframe-container {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #ccc;
-            margin-top: 15px;
+        .btn-link:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -59,20 +56,23 @@
             <p><strong>Visualización:</strong> Tableau, Power BI, Excel Avanzado.</p>
             <p><strong>Automatización:</strong> n8n, VBA.</p>
         </section>
+        
         <section class="project">
-            <h2>Proyecto: Análisis Regional de Game Delivery</h2>
-            <p>Dashboard interactivo diseñado para visualizar y analizar los resultados anuales y regionales.</p>
-            <div class='tableauPlaceholder' id='viz1773774764722' style='position: relative'><noscript><a href='#'><img alt='Análisis Regional ' src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ga&#47;Game_Delivery-ResultadosAnualesRegionales&#47;AnlisisRegional&#47;1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='Game_Delivery-ResultadosAnualesRegionales&#47;AnlisisRegional' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ga&#47;Game_Delivery-ResultadosAnualesRegionales&#47;AnlisisRegional&#47;1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1773774764722');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1153px';vizElement.style.height='695px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1153px';vizElement.style.height='695px';} else { vizElement.style.width='100%';vizElement.style.height='1427px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            <h2>Proyecto 1: Análisis Regional de Game Delivery</h2>
+            <p>Dashboard interactivo diseñado para diagnosticar causas raíz de márgenes operativos negativos a nivel estatal y de clientes.</p>
+            <a href="game-delivery.html" class="btn-link">Ver Análisis Completo ➔</a>
         </section>
+        
         <section class="project">
             <h2>Proyecto 2: Análisis Estadístico de Estabilidad de Procesos</h2>
             <p>Análisis de distribuciones de peso y cálculo de intervalos de confianza utilizando Python.</p>
-            <p><a href="#">Ver análisis completo en formato reporte (Próximamente)</a></p>
+            <a href="#" class="btn-link">Ver análisis completo en formato reporte (Próximamente) ➔</a>
         </section>
+        
         <section class="project">
             <h2>Proyecto 3: Automatización de Flujos de Datos</h2>
-            <p>Diseño de arquitectura ETL para la limpieza y transformación de datos.</p>
-            <p><a href="#">Ver documentación del flujo (Próximamente)</a></p>
+            <p>Diseño de arquitectura ETL para la limpieza y transformación de datos corporativos.</p>
+            <a href="#" class="btn-link">Ver documentación del flujo (Próximamente) ➔</a>
         </section>
     </div>
 </body>
