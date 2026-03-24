@@ -4,47 +4,98 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Delivery - Análisis Regional | Germán Rein</title>
+    
     <style>
+        /* =========================================
+           ESTILOS GENERALES (Iguales a index.html)
+           ========================================= */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
             color: #333;
+            background-color: #f4f4f4; /* Fondo gris claro unificado */
         }
+
+        /* EL ENCABEZADO */
         header {
-            background: #2c3e50;
+            background: #2c3e50; /* Azul oscuro */
             color: #fff;
-            padding: 2rem 0;
+            padding: 3rem 0; /* Mismo espaciado que el index */
             text-align: center;
         }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+        }
+
+        /* EL CONTENEDOR PRINCIPAL */
         .container {
-            width: 85%;
-            max-width: 1200px;
+            width: 80%;
+            max-width: 1000px;
             margin: auto;
+            overflow: hidden;
             padding: 30px 0;
         }
+
+        /* BOTÓN DE VOLVER */
         .btn-back {
             display: inline-block;
             margin-bottom: 20px;
             text-decoration: none;
-            color: #3498db;
+            color: #3498db; /* Azul interactivo */
             font-weight: bold;
+            transition: color 0.3s;
         }
-        .btn-back:hover { text-decoration: underline; }
+        .btn-back:hover { 
+            color: #2980b9; /* Se oscurece al pasar el mouse */
+            text-decoration: underline; 
+        }
+
+        /* CAJA BLANCA PARA EL TEXTO DEL PROYECTO */
         .project-details {
             background: #fff;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Sombra suave */
+            margin-bottom: 40px;
+            border-top: 5px solid #3498db; /* Línea decorativa arriba */
         }
+        .project-details h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .project-details h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+        .project-details ul {
+            padding-left: 20px; /* Sangría para las viñetas */
+        }
+        .project-details li {
+            margin-bottom: 12px; /* Espacio entre cada punto de los hallazgos */
+        }
+
+        /* CAJAS PARA LOS DASHBOARDS DE TABLEAU */
         .dashboard-container {
-            margin-top: 40px;
-            margin-bottom: 60px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden; /* Evita que el dashboard se salga de la caja */
         }
         .dashboard-container h3 {
+            color: #2c3e50;
+            margin-top: 0;
             border-bottom: 2px solid #3498db;
             padding-bottom: 10px;
             margin-bottom: 20px;
@@ -61,17 +112,20 @@
     <div class="container">
         <a href="index.html" class="btn-back">🡄 Volver al Portafolio</a>
 
-        <div class="project-details">
+        <section class="project-details">
             <h2>Resumen del Diagnóstico</h2>
-            <p>Este proyecto de Inteligencia de Negocios se enfoca en analizar los resultados contables del año 2022 para una cadena minorista estadounidense de juegos, consolas y accesorios. A través del Análisis Exploratorio de Datos (EDA), el enfoque transiciona desde el monitoreo de métricas macroeconómicas hacia el diagnóstico de resultados a nivel estatal y de clientes.</p>
+            <p>Este proyecto de Inteligencia de Negocios analiza el desempeño comercial de la cadena minorista "Game Delivery" en EE. UU. durante el <strong>año 2022</strong>. El objetivo principal es explicar por qué numerosos estados y locales presentan ganancias muy bajas (o ventas casi nulas), e incluso márgenes negativos. A través de un Análisis Exploratorio de Datos (EDA) en Tableau, el enfoque transiciona desde una vista macro regional hacia el diagnóstico a nivel de ciudad y cliente.</p>
             
             <h3>Hallazgos Operativos Clave:</h3>
             <ul>
-                <li><strong>Causa Raíz a Nivel Local:</strong> El mayor foco de pérdida nacional es Burlington, Carolina del Norte (-$4.240). El análisis confirma que la pérdida no es logística, sino producto de políticas de promociones deficientes, habiendo vendido accesorios con descuentos promedio del 50%.</li>
-                <li><strong>Falla Logística en Texas:</strong> El estado presenta una rentabilidad negativa de -$2.860. A diferencia de Carolina del Norte, la causa raíz es una tasa inaceptable de envíos demorados (Shipped Late) que destruye el margen comercial.</li>
-                <li><strong>Calidad de Cartera:</strong> Los juegos lideran la rentabilidad ($14.626), mientras que las consolas apenas aportaron $238. Se detectó que a partir de descuentos superiores al 30%, el margen de ganancia global se vuelve negativo.</li>
+                <li><strong>Desempeño Regional Desigual:</strong> Las regiones Oeste y Este concentran el 97% de las ganancias netas. En contraste, la región Central presenta una ganancia de solo $1,412, y la región Sur opera a pérdida (-$675).</li>
+                <li><strong>Rentabilidad por Línea de Producto:</strong> Los "Juegos" son el motor principal del negocio ($14.6K en ganancias). Las "Consolas", a pesar de su alto valor de venta, aportan un margen casi nulo ($238).</li>
+                <li><strong>Impacto de la Estrategia de Descuentos:</strong> Se comprobó que un aumento en las ventas brutas no implica un incremento en el porcentaje de ganancia marginal. A partir de niveles de descuento del 30% en adelante, el margen de ganancia se vuelve sistemáticamente negativo.</li>
+                <li><strong>Focos de Pérdida a Nivel Estatal:</strong> Mientras California y Nueva York lideran las ganancias por amplio margen, la mayoría de los estados genera menos de $1,000 netos. Existen pérdidas críticas en Carolina del Norte (-$4.240), Texas (-$2.860), Tennessee (-$2.200), Pensilvania (-$1.930) e Illinois (-$1.920).</li>
+                <li><strong>Causa Raíz de las Pérdidas:</strong> Inicialmente se podría suponer que las pérdidas derivan de reembolsos o envíos tardíos, pero no es el caso. La mayor pérdida se presenta en la ciudad de Burlington (Carolina del Norte) en la venta de accesorios; dichos productos fueron enviados en tiempo y forma, pero se aplicó un descuento medio del 50%. Esto confirma que las pérdidas se deben a <strong>malas políticas de promociones</strong>.</li>
+                <li><strong>Concentración de Clientes:</strong> Es posible identificar fácilmente en el análisis a los clientes que generan la mayor rentabilidad frente a aquellos que representan pérdidas (estos últimos, por lo general, asociados a la compra de consolas con fuertes descuentos).</li>
             </ul>
-        </div>
+        </section>
 
         <div class="dashboard-container">
             <h3>1. Análisis de Rentabilidad Regional</h3>
