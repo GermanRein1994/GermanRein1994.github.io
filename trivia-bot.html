@@ -70,7 +70,7 @@
         }
         @media (max-width: 768px) {
             .mobile-warning { display: block; }
-            .workflow-container { padding: 10px; }
+            .workflow-container, .project-intro { padding: 15px; }
             .container { width: 95%; }
         }
 
@@ -86,21 +86,23 @@
         .project-intro h2 {
             margin-top: 0;
             color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
         }
         .project-intro h3 {
             color: #2c3e50;
             margin-top: 25px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
+            margin-bottom: 10px;
         }
-        .project-intro ul {
+        .project-intro ul, .project-intro ol {
             padding-left: 20px;
         }
         .project-intro li {
             margin-bottom: 12px;
         }
 
-        /* CAJAS PARA IMÁGENES DEL WORKFLOW */
+        /* CAJAS PARA MÓDULOS Y WORKFLOW */
         .workflow-container {
             background: #fff;
             padding: 30px;
@@ -117,11 +119,21 @@
             margin-bottom: 20px;
             text-align: left;
         }
+        .workflow-container ul {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+        .workflow-container li {
+            margin-bottom: 10px;
+        }
         .workflow-img {
             max-width: 100%;
             height: auto;
             border: 1px solid #ddd;
             border-radius: 5px;
+            margin-top: 15px;
         }
 
         /* SECCIÓN DE CONTACTO (CTA) */
@@ -165,45 +177,73 @@
         </div>
 
         <section class="project-intro">
-            <h2>Resumen del Proyecto</h2>
-            <p>Este proyecto (desarrollado como entrega final para el curso "AI Automation" de Coderhouse) consiste en un workflow automatizado en <strong>n8n</strong> que opera un juego de trivia a través de Telegram. Para manejar la imprevisibilidad de las respuestas humanas, el sistema utiliza una arquitectura híbrida: combina expresiones regulares para interactuar con botones de interfaz y <strong>Modelos de Lenguaje (Llama 3 vía Groq)</strong> para evaluar semánticamente el texto libre enviado por el usuario. El estado de las partidas y el inventario de preguntas se administran de forma persistente utilizando Google Sheets como base de datos.</p>
+            <h2>Descripción del Caso Práctico</h2>
+            <p>El proyecto consiste en un workflow automatizado que opera un juego de trivia a través de Telegram. Los usuarios interactúan con el bot para responder preguntas, gestionar un sistema de vidas y acumular puntaje según distintos niveles de dificultad. El estado de las partidas y el inventario de preguntas se administran de forma persistente utilizando Google Sheets.</p>
+            <p>Para manejar la imprevisibilidad de los usuarios (quienes pueden escribir texto libre en lugar de usar los botones de la interfaz), el flujo integra inteligencia artificial para orquestar y dinamizar la interacción siguiendo este ciclo:</p>
             
-            <h3>Arquitectura y Módulos Clave:</h3>
-            <ul>
-                <li><strong>Enrutamiento Inteligente (Orquestador LLM):</strong> Cuando el usuario escribe texto libre, un modelo LLM deduce la intención (responder, jugar, reglas o reprender) y devuelve un JSON estructurado para enrutar el flujo.</li>
-                <li><strong>Anfitrión IA Sarcástico (Interacción LLM):</strong> Si el usuario envía mensajes fuera de contexto, la rama "reprender" alimenta a un segundo LLM con el estado de la partida actual. Este redacta una respuesta dinámica y sarcástica (estilo porteño) para encarrilar al usuario de vuelta al juego.</li>
-                <li><strong>Lógica de Juego Matemática:</strong> El flujo configura vidas y multiplicadores de puntaje dinámicos según la dificultad elegida. Evalúa respuestas, actualiza el progreso y limpia la interfaz borrando botoneras obsoletas de Telegram en tiempo real.</li>
-                <li><strong>Ingesta de Datos y Analítica:</strong> Unificación de datos desde Telegram y múltiples hojas de cálculo mediante nodos de código. Además, se registra un log histórico por cada respuesta procesada para métricas de Business Intelligence.</li>
-            </ul>
-
-            <h3>Buenas Prácticas Aplicadas:</h3>
-            <ul>
-                <li><strong>Prevención "Anti-Zombie" (Idempotencia):</strong> Verificación estricta que cruza el ID del botón presionado contra el ID de la base de datos, previniendo fallos por doble contabilización si un usuario presiona botones viejos.</li>
-                <li><strong>Control de Sesión (Time-To-Live):</strong> Evaluación de timestamps para limpiar variables de estado si una partida supera las 24 horas de inactividad.</li>
-                <li><strong>Tolerancia a Fallos (Error Handling):</strong> Nodos configurados con políticas de reintento y continuación en caso de caídas de APIs externas, junto con notificaciones automáticas de mantenimiento al usuario.</li>
-                <li><strong>Filtrado de Carga Útil:</strong> Validación nativa para ignorar envíos de imágenes, audios o stickers, asegurando que los nodos de procesamiento LLM solo operen con texto válido.</li>
-            </ul>
+            <ol>
+                <li><strong>Trigger Automático:</strong> el flujo se activa mediante un Telegram Trigger que escucha en tiempo real cualquier mensaje de texto o pulsación de botón en el chat del bot.</li>
+                <li><strong>LLM de Clasificación (Orquestador):</strong> cuando se detecta texto libre, la entrada se envía a un primer modelo de lenguaje (Llama 3 vía Groq) configurado estrictamente para tareas de clasificación semántica. El LLM deduce la intención del usuario y devuelve únicamente un objeto JSON estructurado con la llave "accion" (pudiendo tomar los valores: <em>responder, jugar, reglas o reprender</em>).</li>
+                <li><strong>Lógica Condicional:</strong> un nodo tipo Switch actúa como enrutador leyendo la salida estructurada del LLM. Si la acción es inválida o es una conversación fuera de contexto, el flujo se deriva por la rama "reprender".</li>
+                <li><strong>LLM de Generación de Contenido (Interacción):</strong> la rama "reprender" alimenta a un segundo modelo de lenguaje con dos variables: el mensaje irrelevante del usuario y el contexto actual de la base de datos (si tiene una partida activa o no). Este LLM asume el rol de "anfitrión sarcástico", redactando una respuesta dinámica para encarrilar al usuario.</li>
+                <li><strong>Notificaciones y Métricas:</strong> las salidas (ya sean del motor del juego o las respuestas redactadas por el LLM) se envían de vuelta al usuario como mensajes de Telegram, modificando la interfaz para ocultar botoneras obsoletas. Adicionalmente, se registra un log de las respuestas en una hoja de Histórico para métricas y posterior análisis.</li>
+            </ol>
         </section>
 
         <div class="workflow-container">
             <h3>Demostración del Bot en Acción</h3>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/fnlkE8N4M4w" title="Demostración Trivia Bot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="max-width: 100%; border-radius: 8px;"></iframe>
+            <iframe width="100%" height="450" src="https://www.youtube.com/embed/fnlkE8N4M4w" title="Demostración Trivia Bot" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 8px;"></iframe>
         </div>
         
         <div class="workflow-container">
-            <h3>Módulo de Ingesta, Error Handling y Unificación</h3>
+            <h3>Módulo de Ingesta, Unificación y Notificación de Fallas</h3>
+            <ul>
+                <li>Recibe el Trigger de Telegram y ejecuta lecturas paralelas a Google Sheets.</li>
+                <li>El nodo <code>Unificar_datos</code> normaliza los IDs, cruza la información de sesión y empaqueta todo en un único objeto JSON que viaja por el resto del flujo.</li>
+                <li>El módulo de notificación de fallas envía un mensaje al usuario si hubo un problema en la lectura y/o actualización de los datos de las hojas de cálculo.</li>
+            </ul>
             <img src="placeholder-ingesta.png" alt="Módulo de Ingesta en n8n" class="workflow-img">
         </div>
 
         <div class="workflow-container">
-            <h3>Orquestación Semántica con LLM (Groq)</h3>
+            <h3>Módulo de Gestión de Usuarios y Control de Sesión</h3>
+            <ul>
+                <li>Verifica si el usuario existe en la base de datos. Si no, lo crea.</li>
+                <li><strong>Control 24hs:</strong> Evalúa el timestamp de la <code>ultima_interaccion</code>. Si supera las 24 horas de inactividad, limpia las variables de estado y le notifica al usuario que su partida caducó.</li>
+            </ul>
+        </div>
+
+        <div class="workflow-container">
+            <h3>Módulo de Orquestación con LLM</h3>
+            <ul>
+                <li>Los mensajes de texto que no son comandos directos entran al nodo condicional de texto.</li>
+                <li><strong>Orquestador_LLM:</strong> Recibe las opciones de la pregunta actual y el texto del usuario. Devuelve una instrucción estricta de enrutamiento.</li>
+                <li><strong>Switch Semántico:</strong> Deriva a asignar la respuesta sintética, a enviar las reglas del juego, o al Módulo de Interacción.</li>
+                <li><strong>LLM_Interaccion:</strong> Genera una respuesta sarcástica requiriendo que el usuario vuelva al flujo de la trivia si el mensaje original era irrelevante.</li>
+            </ul>
             <img src="placeholder-llm.png" alt="Módulo LLM en n8n" class="workflow-img">
         </div>
 
         <div class="workflow-container">
-            <h3>Lógica Condicional y Motor de Juego</h3>
+            <h3>Módulo de Lógica de Juego (Setup y Evaluación)</h3>
+            <ul>
+                <li><strong>Preparar Partida:</strong> Configura vidas (5, 3 o 1) y multiplicadores de puntaje (x1, x1.5, x2) según la dificultad seleccionada. Realiza el muestreo aleatorio de preguntas por categoría.</li>
+                <li><strong>Evaluar Respuesta:</strong> Núcleo matemático del juego. Compara resultados, suma puntos aplicando el multiplicador, resta vidas y actualiza el récord.</li>
+                <li><strong>Limpieza de Interfaz:</strong> Nodos dedicados que utilizan las APIs de Telegram para eliminar los teclados en línea (Inline Keyboards) de los mensajes anteriores, evitando saturar el chat.</li>
+                <li><strong>Actualizar Histórico:</strong> Por cada respuesta evaluada, se inserta una nueva fila en una hoja de cálculo registrando parámetros clave (timestamp, dificultad, ID de pregunta, resultado) para su posterior ingesta en herramientas de Business Intelligence.</li>
+                <li><strong>Insistencia y Reglas:</strong> Si el usuario rechaza jugar, se calcula un nivel de rechazo para escalar la presión en el mensaje devuelto. Si pide las reglas, se verifica la ruta de origen para determinar si hace falta borrar botones previos.</li>
+            </ul>
             <img src="placeholder-logica.png" alt="Módulo de Lógica en n8n" class="workflow-img">
         </div>
+
+        <section class="project-intro">
+            <h2>Buenas Prácticas Aplicadas</h2>
+            <ul>
+                <li><strong>Prevención "Anti-Zombie" (Idempotencia):</strong> Verificación estricta que cruza el ID del botón presionado contra el ID de la base de datos, previniendo fallos por doble contabilización si un usuario presiona botones viejos.</li>
+                <li><strong>Tolerancia a Fallos (Error Handling):</strong> Nodos configurados con políticas de reintento y continuación en caso de caídas de APIs externas, junto con notificaciones automáticas de mantenimiento al usuario.</li>
+                <li><strong>Filtrado de Carga Útil:</strong> Validación nativa para ignorar envíos de imágenes, audios o stickers, asegurando que los nodos de procesamiento LLM solo operen con texto válido.</li>
+            </ul>
+        </section>
 
         <div class="cta-section">
             <h3 style="color: #2c3e50;">¿Buscás automatizar procesos complejos?</h3>
