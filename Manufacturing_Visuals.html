@@ -182,7 +182,7 @@
 
         <section class="project-intro">
             <h2>Resumen del Proyecto</h2>
-            <p>Este análisis se enfoca en el monitoreo de una línea de manufactura continua mediante datos de sensores IoT (Temperatura, RPM, Vibración, Consumo Energético). Utilizando un dataset de 10.000 observaciones registradas a intervalos de un minuto, el objetivo fue diseñar un sistema de control integral escalonado: desde la visión estratégica de la Efectividad General del Equipo (OEE) para la gerencia, hasta el control paramétrico para la ingeniería de procesos.</p>
+            <p>Este análisis se enfoca en el monitoreo de un equipo de manufactura continua mediante datos de sensores (Temperatura, RPM, Vibración, Consumo Energético). Utilizando un dataset de 10.000 observaciones registradas a intervalos de un minuto, el objetivo fue diseñar un sistema de control integral escalonado: desde la visión estratégica de la Efectividad General del Equipo (OEE) para la gerencia, hasta el control paramétrico para la ingeniería de procesos.</p>
         </section>
 
 
@@ -194,8 +194,10 @@
                 <p>Diseñado para la evaluación gerencial rápida. Permite visualizar el rendimiento histórico de los turnos y la relación del consumo energético con la eficiencia operativa (OEE).</p>
                 <strong>Consideraciones Analíticas:</strong>
                 <ul>
-                    <li><strong>Disponibilidad Continua:</strong> Al tratarse de un proceso donde la velocidad (RPM) nunca cae a cero en los registros, se asume un Tiempo Utilizado del 100%. Las pérdidas del OEE se deben exclusivamente a mermas en Rendimiento y Calidad.</li>
-                    <li><strong>Estado "No Óptimo":</strong> El 90% del tiempo la máquina opera con la variable de condición en "0". Esto no indica una parada de máquina, sino que el proceso está corriendo fuera de su régimen de máxima eficiencia teórica.</li>
+                    <li><strong>Disponibilidad Continua:</strong> dado que se trata de un proceso en el que la velocidad (RPM) nunca cae a cero en los registros, se asume un Tiempo Utilizado del 100%. En consecuencia, las pérdidas del OEE se deben exclusivamente a mermas en Rendimiento y Calidad.</li>
+                    <li><strong>Estado "No Óptimo":</strong> el equipo opera en condiciones óptimas solo el 6,7% del tiempo. Esto no implica una parada de máquina, sino que el proceso funciona fuera de su régimen de máxima eficiencia teórica. Aun así, el equipo opera al 96,8% de su velocidad máxima, con un nivel de calidad promedio del 94,5%.</li>
+                    <li><strong>OEE Objetivo:</strong> si se define un OEE objetivo de 91,5%, este se alcanza o se supera en el 50% de los días. No se observan diferencias significativas entre turnos, y los rendimientos globales diarios se ubican en el rango [91,2%; 91,7%].</li>
+                    <li><strong>Consumo Energético Acumulado:</strong> en lo que va del mes, el consumo energético asciende a 15.000 kWh. No se observa una relación directa entre el consumo y el rendimiento global del equipo.</li>
                 </ul>
             </div>
             
@@ -256,10 +258,11 @@
             
             <div class="dash-description">
                 <p>Herramienta táctica para la supervisión de planta. El mapa de calor funciona como un filtro interactivo para auditar turnos específicos. La línea de tiempo continua permite auditar si los parámetros físicos operaron dentro de rangos seguros.</p>
-                <strong>Metodología de Control (SPC vs. ML):</strong>
+                <strong>Metodología de Control:</strong>
                 <ul>
-                    <li>Inicialmente se evaluó implementar un modelo de <i>Isolation Forest</i> para la detección de anomalías. Sin embargo, el análisis empírico demostró que los límites de falla eran estrictos y determinísticos.</li>
-                    <li>Se optó por implementar un modelo de Control Estadístico de Procesos (SPC) con <strong>Bandas de Referencia Dinámicas</strong>, logrando un control computacionalmente más ligero y reglas visuales claras para la toma de decisiones en planta.</li>
+                    <li><strong>Oportunidad de Mejora:</strong> actualmente, ya sea por omisión en el registro o por ausencia de fallas, el dataset no cuenta con una columna que indique eventos de falla en el funcionamiento. La incorporación de esta variable impactaría directamente en la medición de la disponibilidad del equipo y permitiría la detección de anomalías mediante modelos de pronóstico.</li>
+                    <li><strong>Estado "No Óptimo":</strong> el 93,8% del tiempo el equipo trabaja en condiciones no óptimas. Esto no implica una parada, sino que el proceso se encuentra fuera de su régimen de máxima eficiencia teórica.</li>
+                    <li><strong>Control Estadístico del Proceso (SPC):</strong> indica los momentos en los que las variables de RPM, temperatura y vibraciones se mantienen dentro de sus rangos operativos óptimos.</li>                
                 </ul>
             </div>
             
