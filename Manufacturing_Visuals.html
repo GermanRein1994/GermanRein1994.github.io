@@ -257,11 +257,11 @@
             <h3>2. Control de Proceso (Nivel Táctico)</h3>
             
             <div class="dash-description">
-                <p>Herramienta táctica para la supervisión de planta. El mapa de calor funciona como un filtro interactivo para auditar turnos específicos. La línea de tiempo continua permite auditar si los parámetros físicos operaron dentro de rangos seguros.</p>
+                <p>Herramienta táctica para la supervisión de planta. La línea de tiempo continua permite auditar si los parámetros físicos operaron dentro de rangos seguros.</p>
                 <strong>Metodología de Control:</strong>
                 <ul>
                     <li><strong>Oportunidad de Mejora:</strong> actualmente, ya sea por omisión en el registro o por ausencia de fallas, el dataset no cuenta con una columna que indique eventos de falla en el funcionamiento. La incorporación de esta variable impactaría directamente en la medición de la disponibilidad del equipo y permitiría la detección de anomalías mediante modelos de pronóstico.</li>
-                    <li><strong>Estado "No Óptimo":</strong> el 93,8% del tiempo el equipo trabaja en condiciones no óptimas. Esto no implica una parada, sino que el proceso se encuentra fuera de su régimen de máxima eficiencia teórica.</li>
+                    <li><strong>Estado "No Óptimo":</strong> el 93,3% del tiempo el equipo trabaja en condiciones no óptimas. Esto no implica una parada, sino que el proceso se encuentra fuera de su régimen de máxima eficiencia teórica.</li>
                     <li><strong>Control Estadístico del Proceso (SPC):</strong> indica los momentos en los que las variables de RPM, temperatura y vibraciones se mantienen dentro de sus rangos operativos óptimos.</li>                
                 </ul>
             </div>
@@ -318,10 +318,11 @@
 
         <div class="dashboard-container">
             
-            <h3>3. Relación entre Variables (Análisis de Causa Raíz)</h3>
+            <h3>3. Relación entre Variables</h3>
             
             <div class="dash-description">
-                <p>Análisis Exploratorio de Datos (EDA) utilizado para identificar las fronteras paramétricas de la máquina. Este tablero evidencia el comportamiento de "molde" que define la condición operativa óptima del proceso.</p>
+                <p>A partir del Análisis Exploratorio de Datos (EDA) utilizado para identificar las fronteras paramétricas de la máquina, se observó que <strong>no existe una correlación lineal directa entre las diferentes variables</strong>. Por ejemplo, un aumento en la velocidad (RPM) no provoca un incremento proporcional en la temperatura ni en las vibraciones; las variables fluctúan de forma independiente.</p>
+                <p>En su lugar, este tablero evidencia un comportamiento de "molde" estrictamente determinístico, donde la condición operativa óptima solo se alcanza cuando las tres variables coinciden simultáneamente dentro de su "caja" de seguridad.</p>
                 <strong>Límites Operativos Descubiertos:</strong>
                 <ul>
                     <li><strong>Temperatura:</strong> Operación restringida estrictamente entre 74°C y 76°C.</li>
