@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Manufacturing - Control OEE | Germán Rein</title>
+    
+    <style>
+        /* =========================================
+           ESTILOS GENERALES
+           ========================================= */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #2c3e50;
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .btn-back:hover { 
+            color: #2980b9;
+            text-decoration: underline; 
+        }
+
+        /* AVISO MÓVIL */
+        .mobile-warning {
+            display: none;
+            background-color: #fcf8e3;
+            border-left: 5px solid #f0ad4e;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #8a6d3b;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .mobile-warning {
+                display: block;
+            }
+            .dashboard-container {
+                padding: 10px;
+            }
+            .container {
+                width: 95%;
+            }
+        }
+
+        /* CAJA PRINCIPAL DE INTRODUCCIÓN */
+        .project-intro {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border-top: 5px solid #3498db;
+        }
+        .project-intro h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        /* CAJAS PARA LOS DASHBOARDS Y SUS EXPLICACIONES */
+        .dashboard-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        .dashboard-container h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* ESTILO PARA EL TEXTO DESCRIPTIVO DENTRO DEL DASHBOARD */
+        .dash-description {
+            background-color: #f8f9fa;
+            border-left: 4px solid #7f8c8d;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .dash-description ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+
+        /* SECCIÓN CALL TO ACTION */
+        .cta-section {
+            text-align: center;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border-top: 5px solid #2c3e50;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 0 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover {
+            background: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Monitoreo OEE y Control de Procesos</h1>
+        <p>Caso: Optimización en Planta de Manufactura Inteligente</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="btn-back">&#129124; Volver al Portafolio</a>
+
+        <div class="mobile-warning">
+            <strong>Aviso:</strong> Este proyecto contiene tableros interactivos de alta densidad de datos. Se recomienda su visualización en una computadora de escritorio para acceder a los filtros y parámetros.
+        </div>
+
+        <section class="project-intro">
+            <h2>Resumen del Proyecto</h2>
+            <p>Este análisis se enfoca en el monitoreo de una línea de manufactura continua mediante datos de sensores IoT (Temperatura, RPM, Vibración, Consumo Energético). Utilizando un dataset de 10.000 observaciones registradas a intervalos de un minuto, el objetivo fue diseñar un sistema de control integral escalonado: desde la visión estratégica de la Efectividad General del Equipo (OEE) para la gerencia, hasta el control paramétrico para la ingeniería de procesos.</p>
+        </section>
+
+        <div class="dashboard-container">
+            <h3>1. Panel de Eficiencia Operativa (Nivel Estratégico)</h3>
+            <div class="dash-description">
+                <p>Diseñado para la evaluación gerencial rápida. Permite visualizar el rendimiento histórico de los turnos y la relación del consumo energético con la eficiencia operativa (OEE).</p>
+                <strong>Consideraciones Analíticas:</strong>
+                <ul>
+                    <li><strong>Disponibilidad Continua:</strong> Al tratarse de un proceso donde la velocidad (RPM) nunca cae a cero en los registros, se asume un Tiempo Utilizado del 100%. Las pérdidas del OEE se deben exclusivamente a mermas en Rendimiento y Calidad.</li>
+                    <li><strong>Estado "No Óptimo":</strong> El 90% del tiempo la máquina opera con la variable de condición en "0". Esto no indica una parada de máquina, sino que el proceso está corriendo fuera de su régimen de máxima eficiencia teórica.</li>
+                </ul>
+            </div>
+            
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class='tableauPlaceholder' id='viz1775135423899' style='position: relative'><noscript><a href='#'><img alt='Panel de Eficiencia Operativa ' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ManufacturingDataset/PanelEficienciaOperativa' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775135423899');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='1327px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <h3>2. Control de Proceso (Nivel Táctico)</h3>
+            <div class="dash-description">
+                <p>Herramienta táctica para la supervisión de planta. El mapa de calor funciona como un filtro interactivo para auditar turnos específicos. La línea de tiempo continua permite auditar si los parámetros físicos operaron dentro de rangos seguros.</p>
+                <strong>Metodología de Control (SPC vs. ML):</strong>
+                <ul>
+                    <li>Inicialmente se evaluó implementar un modelo de <i>Isolation Forest</i> para la detección de anomalías. Sin embargo, el análisis empírico demostró que los límites de falla eran estrictos y determinísticos.</li>
+                    <li>Se optó por implementar un modelo de Control Estadístico de Procesos (SPC) con <strong>Bandas de Referencia Dinámicas</strong>, logrando un control computacionalmente más ligero y reglas visuales claras para la toma de decisiones en planta.</li>
+                </ul>
+            </div>
+            
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class='tableauPlaceholder' id='viz1775135476948' style='position: relative'><noscript><a href='#'><img alt='Control de Proceso ' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ManufacturingDataset-Ctrol/ControldeProceso' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775135476948');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='927px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <h3>3. Relación entre Variables (Análisis de Causa Raíz)</h3>
+            <div class="dash-description">
+                <p>Análisis Exploratorio de Datos (EDA) utilizado para identificar las fronteras paramétricas de la máquina. Este tablero evidencia el comportamiento de "molde" que define la condición operativa óptima del proceso.</p>
+                <strong>Límites Operativos Descubiertos:</strong>
+                <ul>
+                    <li><strong>Temperatura:</strong> Operación restringida estrictamente entre 74°C y 76°C.</li>
+                    <li><strong>Velocidad:</strong> Rango seguro validado entre 1475 y 1525 RPM.</li>
+                    <li><strong>Vibración:</strong> Umbral de falla al superar los 0.06 mm/s.</li>
+                </ul>
+                <p><em>Nota: Estos límites son los que alimentan las bandas de referencia invisibles del tablero de Control Táctico (Arriba).</em></p>
+            </div>
+            
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class='tableauPlaceholder' id='viz1775135485067' style='position: relative'><noscript><a href='#'><img alt='Relación entre Variables ' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ManufacturingDataset-Variables/RelacinentreVariables' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775135485067');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='877px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3 style="color: #2c3e50;">Transformando Datos en Eficiencia Operativa</h3>
+            <p style="color: #666; margin-bottom: 20px;">Como Ingeniero Industrial con experiencia en optimización de procesos y maestrando en Data Mining, me especializo en traducir la realidad de la planta en modelos analíticos predictivos y tableros accionables.</p>
+            <a href="https://www.linkedin.com/in/tu-perfil-aqui" target="_blank" class="cta-btn">Conectar en LinkedIn</a>
+            <a href="https://github.com/tu-usuario-aqui" target="_blank" class="cta-btn">Ver Repositorio en GitHub</a>
+        </div>
+
+    </div>
+</body>
+</html>
