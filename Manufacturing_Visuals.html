@@ -9,31 +9,38 @@
         /* =========================================
            ESTILOS GENERALES
            ========================================= */
+        
+        /* Reset básico y tipografía para toda la página */
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
             color: #333;
-            background-color: #f4f4f4;
+            background-color: #f4f4f4; /* Fondo gris claro general */
         }
 
+        /* Franja superior oscura (Header) */
         header {
             background: #2c3e50;
             color: #fff;
             padding: 3rem 0;
             text-align: center;
         }
+        
         header h1 {
             margin: 0;
             font-size: 2.5rem;
         }
+        
         header p {
             margin-top: 10px;
             font-size: 1.1rem;
             color: #bdc3c7;
         }
 
+        /* Contenedor central que agrupa todo el contenido.
+           Mantiene la web en el medio y evita que se estire al infinito */
         .container {
             width: 80%;
             max-width: 1000px;
@@ -42,6 +49,7 @@
             padding: 30px 0;
         }
 
+        /* Botón para volver al Index */
         .btn-back {
             display: inline-block;
             margin-bottom: 20px;
@@ -50,14 +58,15 @@
             font-weight: bold;
             transition: color 0.3s;
         }
+        
         .btn-back:hover { 
             color: #2980b9;
             text-decoration: underline; 
         }
 
-        /* AVISO MÓVIL */
+        /* Aviso amarillo que solo aparece en celulares */
         .mobile-warning {
-            display: none;
+            display: none; /* Oculto por defecto en PC */
             background-color: #fcf8e3;
             border-left: 5px solid #f0ad4e;
             padding: 15px;
@@ -65,33 +74,36 @@
             color: #8a6d3b;
             font-size: 0.9rem;
         }
+        
+        /* Regla de diseño responsivo: Si la pantalla es menor a 768px (celular) */
         @media (max-width: 768px) {
             .mobile-warning {
-                display: block;
+                display: block; /* Muestra el aviso */
             }
             .dashboard-container {
-                padding: 10px;
+                padding: 10px; /* Achica los márgenes internos para ganar espacio */
             }
             .container {
-                width: 95%;
+                width: 95%; /* Aprovecha más el ancho de la pantallita */
             }
         }
 
-        /* CAJA PRINCIPAL DE INTRODUCCIÓN */
+        /* Caja blanca superior con el resumen del proyecto */
         .project-intro {
             background: #fff;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 40px;
-            border-top: 5px solid #3498db;
+            border-top: 5px solid #3498db; /* Línea azul superior decorativa */
         }
+        
         .project-intro h2 {
             margin-top: 0;
             color: #2c3e50;
         }
 
-        /* CAJAS PARA LOS DASHBOARDS Y SUS EXPLICACIONES */
+        /* Cajas blancas grandes que contienen cada tablero y su texto */
         .dashboard-container {
             background: #fff;
             padding: 30px;
@@ -100,6 +112,7 @@
             margin-bottom: 40px;
             overflow: hidden;
         }
+        
         .dashboard-container h3 {
             color: #2c3e50;
             margin-top: 0;
@@ -108,7 +121,7 @@
             margin-bottom: 15px;
         }
         
-        /* ESTILO PARA EL TEXTO DESCRIPTIVO DENTRO DEL DASHBOARD */
+        /* Cajas grises con borde lateral para las notas técnicas */
         .dash-description {
             background-color: #f8f9fa;
             border-left: 4px solid #7f8c8d;
@@ -117,13 +130,14 @@
             font-size: 0.95rem;
             color: #444;
         }
+        
         .dash-description ul {
             margin-top: 10px;
             margin-bottom: 0;
             padding-left: 20px;
         }
 
-        /* SECCIÓN CALL TO ACTION */
+        /* Sección final de contacto (Call to Action) */
         .cta-section {
             text-align: center;
             background: #fff;
@@ -133,6 +147,7 @@
             margin-top: 20px;
             border-top: 5px solid #2c3e50;
         }
+        
         .cta-btn {
             display: inline-block;
             background: #2c3e50;
@@ -144,6 +159,7 @@
             font-weight: bold;
             transition: background 0.3s;
         }
+        
         .cta-btn:hover {
             background: #3498db;
         }
@@ -157,6 +173,7 @@
     </header>
 
     <div class="container">
+        
         <a href="index.html" class="btn-back">&#129124; Volver al Portafolio</a>
 
         <div class="mobile-warning">
@@ -168,8 +185,11 @@
             <p>Este análisis se enfoca en el monitoreo de una línea de manufactura continua mediante datos de sensores IoT (Temperatura, RPM, Vibración, Consumo Energético). Utilizando un dataset de 10.000 observaciones registradas a intervalos de un minuto, el objetivo fue diseñar un sistema de control integral escalonado: desde la visión estratégica de la Efectividad General del Equipo (OEE) para la gerencia, hasta el control paramétrico para la ingeniería de procesos.</p>
         </section>
 
+
         <div class="dashboard-container">
+            
             <h3>1. Panel de Eficiencia Operativa (Nivel Estratégico)</h3>
+            
             <div class="dash-description">
                 <p>Diseñado para la evaluación gerencial rápida. Permite visualizar el rendimiento histórico de los turnos y la relación del consumo energético con la eficiencia operativa (OEE).</p>
                 <strong>Consideraciones Analíticas:</strong>
@@ -180,12 +200,60 @@
             </div>
             
             <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
-                <div class='tableauPlaceholder' id='viz1775135423899' style='position: relative'><noscript><a href='#'><img alt='Panel de Eficiencia Operativa ' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ManufacturingDataset/PanelEficienciaOperativa' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775135423899');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='700px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='950px';vizElement.style.height='700px';} else { vizElement.style.width='100%';vizElement.style.height='700px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                
+                <div class='tableauPlaceholder' id='viz1775135423899' style='position: relative'>
+                    
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Panel de Eficiencia Operativa' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='ManufacturingDataset/PanelEficienciaOperativa' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>                
+                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1775135423899');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    
+                    // Lógica de dimensiones dinámicas
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='700px'; 
+                    }                     
+                    
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
             </div>
         </div>
 
+
         <div class="dashboard-container">
+            
             <h3>2. Control de Proceso (Nivel Táctico)</h3>
+            
             <div class="dash-description">
                 <p>Herramienta táctica para la supervisión de planta. El mapa de calor funciona como un filtro interactivo para auditar turnos específicos. La línea de tiempo continua permite auditar si los parámetros físicos operaron dentro de rangos seguros.</p>
                 <strong>Metodología de Control (SPC vs. ML):</strong>
@@ -196,12 +264,59 @@
             </div>
             
             <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
-                <div class='tableauPlaceholder' id='viz1775135476948' style='position: relative'><noscript><a href='#'><img alt='Control de Proceso ' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ManufacturingDataset-Ctrol/ControldeProceso' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775135476948');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='700px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='927px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                
+                <div class='tableauPlaceholder' id='viz1775135476948' style='position: relative'>
+                    
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Control de Proceso' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='ManufacturingDataset-Ctrol/ControldeProceso' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>                
+                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1775135476948');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='700px'; 
+                    }                     
+                    
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
             </div>
         </div>
 
+
         <div class="dashboard-container">
+            
             <h3>3. Relación entre Variables (Análisis de Causa Raíz)</h3>
+            
             <div class="dash-description">
                 <p>Análisis Exploratorio de Datos (EDA) utilizado para identificar las fronteras paramétricas de la máquina. Este tablero evidencia el comportamiento de "molde" que define la condición operativa óptima del proceso.</p>
                 <strong>Límites Operativos Descubiertos:</strong>
@@ -214,7 +329,51 @@
             </div>
             
             <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
-                <div class='tableauPlaceholder' id='viz1775135485067' style='position: relative'><noscript><a href='#'><img alt='Relación entre Variables ' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1_rss.png' style='border: none' /></a></noscript><object class='tableauViz'  style='display:none;'><param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> <param name='embed_code_version' value='3' /> <param name='site_root' value='' /><param name='name' value='ManufacturingDataset-Variables/RelacinentreVariables' /><param name='tabs' value='no' /><param name='toolbar' value='yes' /><param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1.png' /> <param name='animate_transition' value='yes' /><param name='display_static_image' value='yes' /><param name='display_spinner' value='yes' /><param name='display_overlay' value='yes' /><param name='display_count' value='yes' /><param name='language' value='es-ES' /></object></div>                <script type='text/javascript'>                    var divElement = document.getElementById('viz1775135485067');                    var vizElement = divElement.getElementsByTagName('object')[0];                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='1000px';vizElement.style.height='700px';} else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='1000px';vizElement.style.height='827px';} else { vizElement.style.width='100%';vizElement.style.height='877px';}                     var scriptElement = document.createElement('script');                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+                
+                <div class='tableauPlaceholder' id='viz1775135485067' style='position: relative'>
+                    
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Relación entre Variables' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='ManufacturingDataset-Variables/RelacinentreVariables' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>                
+                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1775135485067');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='700px'; 
+                    }                     
+                    
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
             </div>
         </div>
 
