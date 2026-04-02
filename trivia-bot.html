@@ -7,7 +7,7 @@
     
     <style>
         /* =========================================
-           ESTILOS GENERALES (Unificados)
+           ESTILOS GENERALES
            ========================================= */
         body {
             font-family: Arial, sans-serif;
@@ -58,8 +58,24 @@
             text-decoration: underline; 
         }
 
+        /* AVISO MÓVIL */
+        .mobile-warning {
+            display: none;
+            background-color: #fcf8e3;
+            border-left: 5px solid #f0ad4e;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #8a6d3b;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .mobile-warning { display: block; }
+            .workflow-container { padding: 10px; }
+            .container { width: 95%; }
+        }
+
         /* CAJA BLANCA PARA EL TEXTO DEL PROYECTO */
-        .project-details {
+        .project-intro {
             background: #fff;
             padding: 30px;
             border-radius: 8px;
@@ -67,31 +83,31 @@
             margin-bottom: 40px;
             border-top: 5px solid #3498db;
         }
-        .project-details h2 {
+        .project-intro h2 {
             margin-top: 0;
             color: #2c3e50;
         }
-        .project-details h3 {
+        .project-intro h3 {
             color: #2c3e50;
             margin-top: 25px;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
         }
-        .project-details ul {
+        .project-intro ul {
             padding-left: 20px;
         }
-        .project-details li {
+        .project-intro li {
             margin-bottom: 12px;
         }
 
         /* CAJAS PARA IMÁGENES DEL WORKFLOW */
         .workflow-container {
             background: #fff;
-            padding: 20px;
+            padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             margin-bottom: 40px;
-            text-align: center; /* Centra las imágenes */
+            text-align: center;
         }
         .workflow-container h3 {
             color: #2c3e50;
@@ -107,6 +123,31 @@
             border: 1px solid #ddd;
             border-radius: 5px;
         }
+
+        /* SECCIÓN DE CONTACTO (CTA) */
+        .cta-section {
+            text-align: center;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border-top: 5px solid #2c3e50;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 0 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover {
+            background: #3498db;
+        }
     </style>
 </head>
 <body>
@@ -117,9 +158,13 @@
     </header>
 
     <div class="container">
-        <a href="index.html" class="btn-back">🡄 Volver al Portafolio</a>
+        <a href="index.html" class="btn-back">&#129124; Volver al Portafolio</a>
 
-        <section class="project-details">
+        <div class="mobile-warning">
+            <strong>Aviso:</strong> Este proyecto contiene capturas detalladas de diagramas de flujo. Se recomienda su visualización en una computadora de escritorio para apreciar la configuración de los nodos con mayor claridad.
+        </div>
+
+        <section class="project-intro">
             <h2>Resumen del Proyecto</h2>
             <p>Este proyecto (desarrollado como entrega final para el curso "AI Automation" de Coderhouse) consiste en un workflow automatizado en <strong>n8n</strong> que opera un juego de trivia a través de Telegram. Para manejar la imprevisibilidad de las respuestas humanas, el sistema utiliza una arquitectura híbrida: combina expresiones regulares para interactuar con botones de interfaz y <strong>Modelos de Lenguaje (Llama 3 vía Groq)</strong> para evaluar semánticamente el texto libre enviado por el usuario. El estado de las partidas y el inventario de preguntas se administran de forma persistente utilizando Google Sheets como base de datos.</p>
             
@@ -158,6 +203,13 @@
         <div class="workflow-container">
             <h3>Lógica Condicional y Motor de Juego</h3>
             <img src="placeholder-logica.png" alt="Módulo de Lógica en n8n" class="workflow-img">
+        </div>
+
+        <div class="cta-section">
+            <h3 style="color: #2c3e50;">¿Buscás automatizar procesos complejos?</h3>
+            <p style="color: #666; margin-bottom: 20px;">Diseño flujos de trabajo escalables integrando lógica tradicional con modelos de inteligencia artificial para optimizar operaciones y crear herramientas conversacionales.</p>
+            <a href="https://www.linkedin.com/in/tu-perfil-aqui" target="_blank" class="cta-btn">Conectar en LinkedIn</a>
+            <a href="mailto:germanrein@gmail.com" class="cta-btn">Enviar Correo</a>
         </div>
 
     </div>
