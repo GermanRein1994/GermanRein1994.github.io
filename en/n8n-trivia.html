@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Trivia Bot - n8n | Germán Rein</title>
+    
+    <style>
+        /* =========================================
+           GENERAL STYLES
+           ========================================= */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* HEADER */
+        header {
+            position: relative;
+            background: #2c3e50;
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+        }
+
+        /* LANGUAGE TOGGLE BUTTON */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+
+        /* BACK BUTTON */
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .btn-back:hover { 
+            color: #2980b9; 
+            text-decoration: underline; 
+        }
+
+        /* MOBILE WARNING */
+        .mobile-warning {
+            display: none;
+            background-color: #fcf8e3;
+            border-left: 5px solid #f0ad4e;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #8a6d3b;
+            font-size: 0.9rem;
+        }
+        
+        /* TRANSLATION DISCLAIMER */
+        .translation-notice {
+            background-color: #e8f4fd;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-warning { display: block; }
+            .workflow-container, .project-intro { padding: 15px; }
+            .container { width: 95%; }
+            .lang-toggle { top: 10px; right: 10px; padding: 6px 12px; }
+        }
+
+        /* INTRO BOX */
+        .project-intro {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border-top: 5px solid #3498db;
+        }
+        .project-intro h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .project-intro h3 {
+            color: #2c3e50;
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        .project-intro ul, .project-intro ol {
+            padding-left: 20px;
+        }
+        .project-intro li {
+            margin-bottom: 12px;
+        }
+
+        /* MODULES AND WORKFLOW BOXES */
+        .workflow-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .workflow-container h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .workflow-container ul {
+            text-align: left;
+            padding-left: 20px;
+            margin-bottom: 20px;
+            color: #444;
+        }
+        .workflow-container li {
+            margin-bottom: 10px;
+        }
+        .workflow-img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 15px;
+        }
+
+        /* CALL TO ACTION (CTA) */
+        .cta-section {
+            text-align: center;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border-top: 5px solid #2c3e50;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 0 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover {
+            background: #3498db;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../n8n-trivia.html" class="lang-toggle">ES | Español</a>
+        <h1>Interactive Trivia Bot via Telegram</h1>
+        <p>Case Study: Automation and Semantic Orchestration with n8n and LLMs</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="btn-back">&#129124; Back to Portfolio</a>
+
+        <div class="mobile-warning">
+            <strong>Notice:</strong> This project contains detailed workflow diagram screenshots. Desktop viewing is recommended to properly appreciate the node configurations.
+        </div>
+
+        <section class="project-intro">
+            <h2>Case Study Description</h2>
+            
+            <div class="translation-notice">
+                <strong>Note on Localization:</strong> The demonstration video and workflow diagrams retain their original Spanish layout. However, all technical logic, module explanations, and best practices are fully translated into English below.
+            </div>
+
+            <p>The project consists of an automated workflow that operates a trivia game via Telegram. Users interact with the bot to answer questions, manage a life system, and accumulate scores based on different difficulty levels. The game states and question inventory are persistently managed using Google Sheets.</p>
+            <p>To handle user unpredictability (as they might type free text instead of using the interface buttons), the flow integrates artificial intelligence to orchestrate and streamline the interaction following this cycle:</p>
+            
+            <ol>
+                <li><strong>Automatic Trigger:</strong> The flow is activated via a Telegram Trigger that listens in real-time for any text message or button press in the bot's chat.</li>
+                <li><strong>Classification LLM (Orchestrator):</strong> When free text is detected, the input is sent to a primary language model (Llama 3 via Groq) strictly configured for semantic classification tasks. The LLM deduces the user's intent and returns only a structured JSON object with the key "action" (which can take the values: <em>answer, play, rules, or reprimand</em>).</li>
+                <li><strong>Conditional Logic:</strong> A Switch node acts as a router reading the LLM's structured output. If the action is invalid or the conversation is out of context, the flow is routed through the "reprimand" branch.</li>
+                <li><strong>Content Generation LLM (Interaction):</strong> The "reprimand" branch feeds a secondary language model with two variables: the user's irrelevant message and the current database context (whether an active game exists). This LLM assumes the role of a "sarcastic host", crafting a dynamic response to get the user back on track.</li>
+                <li><strong>Notifications and Metrics:</strong> Outputs (whether from the game engine or LLM-drafted responses) are sent back to the user as Telegram messages, dynamically modifying the interface to hide obsolete inline keyboards. Additionally, a response log is recorded in a History sheet for metrics and further analysis.</li>
+            </ol>
+        </section>
+
+        <div class="workflow-container">
+            <h3>Bot Demonstration in Action</h3>
+            <iframe width="100%" height="450" src="https://www.youtube.com/embed/fnlkE8N4M4w" title="Trivia Bot Demonstration" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 8px;"></iframe>
+        </div>
+        
+        <div class="workflow-container">
+            <h3>Ingestion, Unification, and Error Notification Module</h3>
+            <ul>
+                <li>Receives the Telegram Trigger and executes parallel reads to Google Sheets.</li>
+                <li>The <code>Unify_data</code> node normalizes IDs, cross-references session information, and packages everything into a single JSON object that travels through the rest of the flow.</li>
+                <li>The error notification module sends a message to the user if there was an issue reading and/or updating data in the Google Sheets.</li>
+            </ul>
+            <img src="../assets/img/placeholder-ingesta.png" alt="Ingestion Module in n8n" class="workflow-img">
+        </div>
+
+        <div class="workflow-container">
+            <h3>User Management and Session Control Module</h3>
+            <ul>
+                <li>Verifies if the user exists in the database. If not, it creates them.</li>
+                <li><strong>24h Control:</strong> Evaluates the <code>last_interaction</code> timestamp. If it exceeds 24 hours of inactivity, it clears the state variables and notifies the user that their session has expired.</li>
+            </ul>
+        </div>
+
+        <div class="workflow-container">
+            <h3>LLM Orchestration Module</h3>
+            <ul>
+                <li>Text messages that are not direct commands enter the text conditional node.</li>
+                <li><strong>LLM_Orchestrator:</strong> Receives the current question's options and the user's text. Returns a strict routing instruction.</li>
+                <li><strong>Semantic Switch:</strong> Routes to assigning the synthetic answer, sending the game rules, or to the Interaction Module.</li>
+                <li><strong>LLM_Interaction:</strong> Generates a sarcastic response requiring the user to return to the trivia flow if the original message was irrelevant.</li>
+            </ul>
+            <img src="../assets/img/placeholder-llm.png" alt="LLM Module in n8n" class="workflow-img">
+        </div>
+
+        <div class="workflow-container">
+            <h3>Game Logic Module (Setup and Evaluation)</h3>
+            <ul>
+                <li><strong>Prepare Game:</strong> Configures lives (5, 3, or 1) and score multipliers (x1, x1.5, x2) based on the selected difficulty. Performs random sampling of questions by category.</li>
+                <li><strong>Evaluate Answer:</strong> The mathematical core of the game. Compares results, adds points applying the multiplier, subtracts lives, and updates the historical record.</li>
+                <li><strong>Interface Cleanup:</strong> Dedicated nodes use Telegram APIs to remove inline keyboards from previous messages, preventing chat clutter.</li>
+                <li><strong>Update History:</strong> For each evaluated answer, a new row is inserted into a spreadsheet recording key parameters (timestamp, difficulty, question ID, result) for later ingestion into Business Intelligence tools.</li>
+                <li><strong>Insistence and Rules:</strong> If the user refuses to play, a rejection level is calculated to escalate pressure in the returned message. If they ask for the rules, the origin route is verified to determine whether previous buttons need to be deleted.</li>
+            </ul>
+            <img src="../assets/img/placeholder-logica.png" alt="Logic Module in n8n" class="workflow-img">
+        </div>
+
+        <section class="project-intro">
+            <h2>Applied Best Practices</h2>
+            <ul>
+                <li><strong>Anti-Zombie Prevention (Idempotency):</strong> Strict verification cross-referencing the pressed button's ID against the database ID, preventing double-counting bugs if a user clicks old buttons.</li>
+                <li><strong>Fault Tolerance (Error Handling):</strong> Nodes configured with retry policies and "Continue On Fail" settings for external API drops, alongside automated maintenance notifications for the user.</li>
+                <li><strong>Payload Filtering:</strong> Native validation to ignore image, audio, or sticker uploads, ensuring LLM processing nodes only operate with valid text strings.</li>
+            </ul>
+        </section>
+
+        <div class="cta-section">
+            <h3 style="color: #2c3e50;">Looking to automate complex processes?</h3>
+            <p style="color: #666; margin-bottom: 20px;">I design scalable workflows integrating traditional logic with artificial intelligence models to optimize operations and build conversational tools.</p>
+            <a href="https://www.linkedin.com/in/tu-perfil-aqui" target="_blank" class="cta-btn">Connect on LinkedIn</a>
+            <a href="mailto:germanrein@gmail.com" class="cta-btn">Send Email</a>
+        </div>
+
+    </div>
+</body>
+</html>
