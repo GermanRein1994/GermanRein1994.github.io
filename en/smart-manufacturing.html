@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Manufacturing - OEE Control | Germán Rein</title>
+    
+    <style>
+        /* =========================================
+           GENERAL STYLES
+           ========================================= */
+        
+        /* Basic reset and typography */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* HEADER */
+        header {
+            position: relative;
+            background: #2c3e50;
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+        }
+
+        /* LANGUAGE TOGGLE BUTTON */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+
+        /* BACK BUTTON */
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .btn-back:hover { 
+            color: #2980b9;
+            text-decoration: underline; 
+        }
+
+        /* MOBILE WARNING */
+        .mobile-warning {
+            display: none;
+            background-color: #fcf8e3;
+            border-left: 5px solid #f0ad4e;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #8a6d3b;
+            font-size: 0.9rem;
+        }
+
+        /* TRANSLATION DISCLAIMER */
+        .translation-notice {
+            background-color: #e8f4fd;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .mobile-warning { display: block; }
+            .dashboard-container { padding: 10px; }
+            .container { width: 95%; }
+            .lang-toggle { top: 10px; right: 10px; padding: 6px 12px; }
+        }
+
+        /* INTRO BOX */
+        .project-intro {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border-top: 5px solid #3498db;
+        }
+        .project-intro h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        /* DASHBOARD CONTAINERS */
+        .dashboard-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        .dashboard-container h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* INSIGHT DESCRIPTIONS */
+        .dash-description {
+            background-color: #f8f9fa;
+            border-left: 4px solid #7f8c8d;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .dash-description ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        .dash-description li {
+            margin-bottom: 8px;
+        }
+
+        /* CALL TO ACTION */
+        .cta-section {
+            text-align: center;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border-top: 5px solid #2c3e50;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 0 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover { background: #3498db; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../smart-manufacturing.html" class="lang-toggle">ES | Español</a>
+        <h1>OEE Monitoring and Process Control</h1>
+        <p>Case Study: Smart Manufacturing Plant Optimization</p>
+    </header>
+
+    <div class="container">
+        
+        <a href="index.html" class="btn-back">&#129124; Back to Portfolio</a>
+
+        <div class="mobile-warning">
+            <strong>Notice:</strong> This project contains high-density interactive dashboards. Desktop viewing is recommended to properly interact with spatial filters and parameters.
+        </div>
+
+        <section class="project-intro">
+            <h2>Project Summary</h2>
+            
+            <div class="translation-notice">
+                <strong>Note on Localization:</strong> The interactive embedded dashboards retain their original Spanish layout. However, all structural insights, key metrics, and technical considerations are fully translated into English below each visualization.
+            </div>
+
+            <p>This analysis focuses on monitoring continuous manufacturing equipment using sensor data (Temperature, RPM, Vibration, Energy Consumption). Utilizing a dataset of 10,000 observations recorded at one-minute intervals, the objective was to design a tiered comprehensive control system: starting from a strategic view of Overall Equipment Effectiveness (OEE) for management, down to parametric control for process engineering.</p>
+        </section>
+
+
+        <div class="dashboard-container">
+            
+            <h3>1. Operational Efficiency Dashboard (Strategic Level)</h3>
+            
+            <div class="dash-description">
+                <p>Designed for quick managerial evaluation. It provides a visual representation of historical shift performance and the relationship between energy consumption and Overall Equipment Effectiveness (OEE).</p>
+                <strong>Analytical Considerations:</strong>
+                <ul>
+                    <li><strong>Continuous Availability:</strong> Since this is a process where the speed (RPM) never drops to zero in the records, a 100% Operating Time is assumed. Consequently, OEE losses are driven exclusively by Performance and Quality drops.</li>
+                    <li><strong>"Sub-optimal" State:</strong> The equipment operates under strict optimal conditions only 6.7% of the time. This does not imply a machine stoppage, but rather that the process functions outside its maximum theoretical efficiency regime. Even so, the equipment operates at 96.8% of its maximum speed, with an average quality rate of 94.5%.</li>
+                    <li><strong>Target OEE:</strong> If a target OEE of 91.5% is defined, it is met or exceeded 50% of the days. No significant differences are observed between shifts, and overall daily yields fall within the [91.2%; 91.7%] range.</li>
+                    <li><strong>Cumulative Energy Consumption:</strong> Month-to-date energy consumption amounts to 15,000 kWh. There is no direct correlation observed between power consumption and the overall performance of the equipment.</li>
+                </ul>
+            </div>
+            
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                
+                <div class='tableauPlaceholder' id='viz1775135423899' style='position: relative'>
+                    
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Operational Efficiency Panel' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='ManufacturingDataset/PanelEficienciaOperativa' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset/PanelEficienciaOperativa/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>                
+                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1775135423899');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='700px'; 
+                    }                      
+                    
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
+            </div>
+        </div>
+
+
+        <div class="dashboard-container">
+            
+            <h3>2. Process Control (Tactical Level)</h3>
+            
+            <div class="dash-description">
+                <p>A tactical tool for plant floor supervision. The continuous timeline allows auditing whether the physical parameters operated within safe setpoints over the last hours.</p>
+                <strong>Control Methodology:</strong>
+                <ul>
+                    <li><strong>Improvement Opportunity:</strong> Currently, either due to recording omissions or a genuine lack of failures, the dataset does not feature a column indicating malfunction events. Incorporating this variable would directly impact equipment availability tracking and enable anomaly detection through forecasting models.</li>
+                    <li><strong>"Sub-optimal" State:</strong> 93.3% of the time, the equipment works in sub-optimal conditions. Again, this does not imply downtime, but indicates the process drifts outside its most efficient theoretical parameters.</li>
+                    <li><strong>Statistical Process Control (SPC):</strong> Pinpoints the exact moments when RPM, temperature, and vibration variables remain within their optimal operating ranges through reference bands.</li>                
+                </ul>
+            </div>
+            
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                
+                <div class='tableauPlaceholder' id='viz1775135476948' style='position: relative'>
+                    
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Process Control' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='ManufacturingDataset-Ctrol/ControldeProceso' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Ctrol/ControldeProceso/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>                
+                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1775135476948');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='700px'; 
+                    }                      
+                    
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
+            </div>
+        </div>
+
+
+        <div class="dashboard-container">
+            
+            <h3>3. Relationship Between Variables</h3>
+            
+            <div class="dash-description">
+                <p>Based on the Exploratory Data Analysis (EDA) used to identify the machine's parametric boundaries, it was observed that <strong>there is no direct linear correlation between the different variables</strong>. For example, an increase in speed (RPM) does not cause a proportional increase in temperature or vibrations; the variables fluctuate independently.</p>
+                <p>Instead, this dashboard evidences a strictly deterministic "mold" behavior, where the optimal operating condition is only achieved when all three variables coincide simultaneously inside their safety "box".</p>
+                <strong>Discovered Operational Boundaries:</strong>
+                <ul>
+                    <li><strong>Temperature:</strong> Operation strictly restricted between 74°C and 76°C.</li>
+                    <li><strong>Speed:</strong> Safe range validated between 1475 and 1525 RPM.</li>
+                    <li><strong>Vibration:</strong> Failure threshold when exceeding 0.055 mm/s.</li>
+                </ul>
+                <p><em>Note: These boundaries are the inputs that feed the invisible reference bands on the Tactical Control dashboard (Above).</em></p>
+            </div>
+            
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                
+                <div class='tableauPlaceholder' id='viz1775135485067' style='position: relative'>
+                    
+                    <noscript>
+                        <a href='#'>
+                            <img alt='Relationship Between Variables' src='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1_rss.png' style='border: none' />
+                        </a>
+                    </noscript>
+                    
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='ManufacturingDataset-Variables/RelacinentreVariables' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Ma/ManufacturingDataset-Variables/RelacinentreVariables/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>                
+                
+                <script type='text/javascript'>                    
+                    var divElement = document.getElementById('viz1775135485067');                    
+                    var vizElement = divElement.getElementsByTagName('object')[0];                    
+                    
+                    if ( divElement.offsetWidth > 800 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else if ( divElement.offsetWidth > 500 ) { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='677px'; 
+                    } else { 
+                        vizElement.style.width='100%'; 
+                        vizElement.style.height='700px'; 
+                    }                      
+                    
+                    var scriptElement = document.createElement('script');                    
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+                </script>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3 style="color: #2c3e50;">Transforming Data into Operational Efficiency</h3>
+            <p style="color: #666; margin-bottom: 20px;">As an Industrial Engineer with experience in process optimization, I specialize in translating plant reality into predictive analytical models and actionable dashboards.</p>
+            <a href="https://www.linkedin.com/in/german-rein-401550169/" target="_blank" class="cta-btn">Connect on LinkedIn</a>
+            <a href="mailto:germanrein@gmail.com" class="cta-btn">Send Email</a>
+        </div>
+
+    </div>
+</body>
+</html>
