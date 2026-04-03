@@ -20,14 +20,35 @@
 
         /* Franja superior oscura (Header) */
         header {
+            position: relative; 
             background: #2c3e50;
             color: #fff;
             padding: 3rem 0;
             text-align: center;
         }
+        
         header h1 { margin: 0; font-size: 2.5rem; }
         header p { margin-top: 10px; font-size: 1.1rem; color: #bdc3c7; }
-
+        
+        /* BOTÓN DE IDIOMA */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
         /* Contenedor central */
         .container {
             width: 80%;
@@ -65,6 +86,7 @@
             .mobile-warning { display: block; }
             .dashboard-container { padding: 10px; }
             .container { width: 95%; }
+            .lang-toggle { top: 10px; right: 10px; padding: 6px 12px; } 
         }
 
         /* Caja de Introducción */
@@ -156,6 +178,9 @@
 
         <section class="project-intro">
             <h2>Resumen del Diagnóstico</h2>
+            <div class="translation-notice">
+                <strong>Nota sobre la localización:</strong> Los tableros interactivos integrados conservan su diseño en inglés. No obstante, todos los análisis estructurales, métricas clave y recomendaciones estratégicas están redactados en español.
+            </div>
             <p>Este proyecto de Inteligencia de Negocios analiza el desempeño comercial de la cadena minorista "Game Delivery" en EE. UU. durante el <strong>año 2022</strong>. El objetivo principal es explicar por qué algunas sucursales y regiones, a pesar de tener un alto volumen de facturación, presentan ganancias netas muy bajas o incluso márgenes negativos.</p>
             <p>A través de un Análisis Exploratorio de Datos (EDA) en Tableau, el enfoque transiciona de manera escalonada: comenzando por una vista macro regional, profundizando a nivel estatal, y finalizando con un diagnóstico preciso a nivel de producto y cliente.</p>
         </section>
