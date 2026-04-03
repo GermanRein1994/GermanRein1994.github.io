@@ -7,7 +7,6 @@
     <style>
         /* =========================================
            INICIO DE LOS ESTILOS (CSS)
-           Acá le damos color, forma y tamaño a las cosas
            ========================================= */
         
         /* ESTILOS GENERALES DE LA PÁGINA */
@@ -22,6 +21,7 @@
 
         /* EL ENCABEZADO SUPERIOR */
         header {
+            position: relative; /* Necesario para posicionar el botón de idioma */
             background: #2c3e50;
             color: #fff;
             padding: 3rem 0;
@@ -35,6 +35,26 @@
             margin-top: 10px;
             font-size: 1.1rem;
             color: #bdc3c7;
+        }
+
+        /* BOTÓN DE IDIOMA (BANDERITA) */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
         }
 
         /* EL CONTENEDOR PRINCIPAL */
@@ -136,11 +156,17 @@
                 width: 100%;
                 height: auto;
             }
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
+        <a href="en/index.html" class="lang-toggle">EN | English</a>
         <h1>Germán Rein</h1>
         <p>Ingeniero Industrial | Analista de Datos y Optimización de Procesos</p>
     </header>
@@ -160,7 +186,7 @@
         </section>
         
         <div class="project-card">
-            <img src="thumb-gamedelivery.png" alt="Dashboard de Game Delivery" class="project-img">
+            <img src="assets/img/thumb-gamedelivery.png" alt="Dashboard de Game Delivery" class="project-img">
             
             <div class="project-content">
                 <span class="tag">Inteligencia de Negocios</span>
@@ -175,19 +201,19 @@
         </div>
         
         <div class="project-card">
-            <img src="thumb-manufacturing.png" alt="Dashboard de Control OEE y Manufactura" class="project-img">
+            <img src="assets/img/thumb-manufacturing.png" alt="Dashboard de Control OEE y Manufactura" class="project-img">
             <div class="project-content">
                 <span class="tag">Control de Procesos</span>
                 <span class="tag">Tableau</span>
                 <h2>Monitoreo OEE y Control de Procesos</h2>
                 <p><strong>El Desafío:</strong> Diseñar un sistema de monitoreo para un equipo de producción continua, analizando 10.000 observaciones de sensores a nivel de minuto para detectar ineficiencias.</p>
-                <p><strong>El Resultado:</strong> Mediante Análisis Exploratorio (EDA), se descubrió la frontera operativa empírica de la máquina y que si bien el Rendimiento Global de Equipo es Clase Mundial, solo el 9,7% del tiempo funciona a nivel óptimo.</p>
-                <a href="Manufacturing_Visuals.html" class="btn-link">Ver Análisis y Tableros ➔</a>
+                <p><strong>El Resultado:</strong> Mediante Análisis Exploratorio (EDA), se descubrió la frontera operativa empírica de la máquina y que si bien el Rendimiento Global de Equipo es Clase Mundial, solo el 6,7% del tiempo funciona a nivel óptimo.</p>
+                <a href="smart-manufacturing.html" class="btn-link">Ver Análisis y Tableros ➔</a>
             </div>
         </div>
         
         <div class="project-card">
-            <img src="thumb-triviabot.png" alt="Workflow de n8n para Bot de Trivia" class="project-img">
+            <img src="assets/img/thumb-triviabot.png" alt="Workflow de n8n para Bot de Trivia" class="project-img">
             <div class="project-content">
                 <span class="tag">Automatización</span>
                 <span class="tag">n8n</span>
@@ -196,7 +222,7 @@
                 <p><strong>El Desafío:</strong> Diseñar un flujo automatizado que no solo gestione un juego de trivia con persistencia de datos, sino que también se adapte a la imprevisibilidad humana al recibir comandos de texto libre.</p>
                 <p><strong>El Resultado:</strong> Una arquitectura híbrida en n8n que integra Google Sheets y una orquestación semántica con Llama 3 (Groq). El sistema enruta intenciones, gestiona estados (vidas, puntajes) y responde con sarcasmo a interacciones fuera de contexto.</p>
                 
-                <a href="trivia-bot.html" class="btn-link">Ver Arquitectura Completa ➔</a>
+                <a href="n8n-trivia.html" class="btn-link">Ver Arquitectura Completa ➔</a>
             </div>
         </div>
 
