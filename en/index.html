@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Germán Rein | Data Portfolio</title> 
+    <style>
+        /* =========================================
+           GENERAL STYLES
+           ========================================= */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* HEADER */
+        header {
+            position: relative; /* Agregado para posicionar el botón de idioma */
+            background: #2c3e50;
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            margin-top: 10px;
+            font-size: 1.1rem;
+            color: #bdc3c7;
+        }
+
+        /* LANGUAGE TOGGLE BUTTON */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+        
+        /* SKILLS & PROFILE SECTION */
+        .skills {
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .skills h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .profile-text {
+            margin-bottom: 25px; 
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            text-align: justify;
+        }
+        .skills > p {
+            margin: 2px 0;
+            line-height: 1.4;
+        }
+        
+        /* PROJECT CARDS */
+        .project-card {
+            display: flex;
+            gap: 25px;
+            background: #fff;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            align-items: flex-start;
+            border-left: 5px solid #3498db;
+        }
+        .project-img {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 1px solid #eee;
+            background-color: #e9ecef;
+        }
+        .project-content {
+            flex: 1;
+        }
+        .project-content h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5rem;
+        }
+
+        /* TAGS */
+        .tag {
+            display: inline-block;
+            background: #eee;
+            color: #555;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+            margin-right: 5px;
+        }
+
+        /* CTA BUTTONS */
+        .btn-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 18px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-link:hover {
+            background-color: #2980b9;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .project-card {
+                flex-direction: column;
+            }
+            .project-img {
+                width: 100%;
+                height: auto;
+            }
+            .lang-toggle {
+                top: 10px;
+                right: 10px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../index.html" class="lang-toggle">ES | Español</a>
+        <h1>Germán Rein</h1>
+        <p>Industrial Engineer | Data Analyst & Process Optimization</p>
+    </header>
+    
+    <div class="container">
+        
+        <section class="skills">
+            <h2>Professional Profile & Tech Stack</h2>
+            
+            <div class="profile-text">
+                <p>Industrial Engineer with a proactive profile, driven by continuous improvement and Operational Excellence. I specialize in <strong>data collection, cleaning, and interpretation</strong> to identify optimization opportunities in business processes and workflows. Experienced in developing ETL pipelines and automations using Power BI, Power Query, and SQL. I have a solid background collaborating in dynamic environments and cross-functional teams, translating complex <em>insights</em> into strategic actions.</p>
+            </div>
+
+            <p><strong>Data Analysis & ETL:</strong> SQL, Python, Power Query.</p>
+            <p><strong>Visualization:</strong> Tableau, Power BI, Advanced Excel.</p>
+            <p><strong>Automation:</strong> n8n, VBA.</p>
+        </section>
+        
+        <div class="project-card">
+            <img src="../assets/img/thumb-gamedelivery.png" alt="Game Delivery Dashboard" class="project-img">
+            
+            <div class="project-content">
+                <span class="tag">Business Intelligence</span>
+                <span class="tag">Tableau</span>
+                
+                <h2>Profitability Diagnostics: Game Delivery</h2>
+                <p><strong>The Challenge:</strong> Identify why retail branches with high sales volume were operating with negative profit margins.</p>
+                <p><strong>The Result:</strong> Through Exploratory Data Analysis (EDA), -$4.2K in hidden losses were uncovered, directly tied to destructive pricing policies in North Carolina and logistical bottlenecks in Texas.</p>
+                
+                <a href="game-delivery.html" class="btn-link">View Full Analysis ➔</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <img src="../assets/img/thumb-manufacturing.png" alt="OEE and Process Control Dashboard" class="project-img">
+            <div class="project-content">
+                <span class="tag">Process Control</span>
+                <span class="tag">Tableau</span>
+                <h2>OEE Monitoring & Process Control</h2>
+                <p><strong>The Challenge:</strong> Design a monitoring system for continuous production equipment, analyzing 10,000 minute-level sensor observations to detect process inefficiencies.</p>
+                <p><strong>The Result:</strong> Through EDA, the machine's empirical operational boundaries were discovered, revealing that although the Overall Equipment Effectiveness (OEE) is World-Class, it operates at its strict optimal level only 6.7% of the time.</p>
+                <a href="smart-manufacturing.html" class="btn-link">View Dashboards & Analysis ➔</a>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <img src="../assets/img/thumb-triviabot.png" alt="n8n Workflow for Trivia Bot" class="project-img">
+            <div class="project-content">
+                <span class="tag">Automation</span>
+                <span class="tag">n8n</span>
+                <span class="tag">LLMs / AI</span>
+                <h2>Interactive Trivia Bot via Telegram</h2>
+                <p><strong>The Challenge:</strong> Design an automated workflow capable of managing a trivia game with data persistence, while dynamically adapting to human unpredictability through free-text commands.</p>
+                <p><strong>The Result:</strong> A hybrid architecture built in n8n integrating Google Sheets and semantic orchestration via Llama 3 (Groq). The system routes user intents, manages game states (lives, scores), and issues sarcastic responses to out-of-context interactions.</p>
+                
+                <a href="n8n-trivia.html" class="btn-link">View Full Architecture ➔</a>
+            </div>
+        </div>
+
+    </div> 
+</body>
+</html>
