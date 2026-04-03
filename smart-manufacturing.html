@@ -22,6 +22,7 @@
 
         /* Franja superior oscura (Header) */
         header {
+            position: relative;
             background: #2c3e50;
             color: #fff;
             padding: 3rem 0;
@@ -38,8 +39,26 @@
             font-size: 1.1rem;
             color: #bdc3c7;
         }
-
-        /* Contenedor central que agrupa todo el contenido.
+        /* BOTÓN DE IDIOMA */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+                /* Contenedor central que agrupa todo el contenido.
            Mantiene la web en el medio y evita que se estire al infinito */
         .container {
             width: 80%;
@@ -86,6 +105,7 @@
             .container {
                 width: 95%; /* Aprovecha más el ancho de la pantallita */
             }
+            .lang-toggle { top: 10px; right: 10px; padding: 6px 12px; }
         }
 
         /* Caja blanca superior con el resumen del proyecto */
@@ -168,6 +188,7 @@
 <body>
 
     <header>
+        <a href="en/smart-manufacturing.html" class="lang-toggle">EN | English</a>
         <h1>Monitoreo OEE y Control de Procesos</h1>
         <p>Caso: Optimización en Planta de Manufactura Inteligente</p>
     </header>
