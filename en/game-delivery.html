@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Delivery - Regional Analysis | Germán Rein</title>
+    
+    <style>
+        /* =========================================
+           GENERAL STYLES
+           ========================================= */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* HEADER */
+        header {
+            position: relative;
+            background: #2c3e50;
+            color: #fff;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        header h1 { margin: 0; font-size: 2.5rem; }
+        header p { margin-top: 10px; font-size: 1.1rem; color: #bdc3c7; }
+
+        /* LANGUAGE TOGGLE BUTTON */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: #fff;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 80%;
+            max-width: 1000px;
+            margin: auto;
+            overflow: hidden;
+            padding: 30px 0;
+        }
+
+        /* BACK BUTTON */
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        .btn-back:hover { 
+            color: #2980b9;
+            text-decoration: underline; 
+        }
+
+        /* MOBILE WARNING */
+        .mobile-warning {
+            display: none;
+            background-color: #fcf8e3;
+            border-left: 5px solid #f0ad4e;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #8a6d3b;
+            font-size: 0.9rem;
+        }
+        
+        /* TRANSLATION DISCLAIMER */
+        .translation-notice {
+            background-color: #e8f4fd;
+            border-left: 5px solid #3498db;
+            padding: 15px;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-warning { display: block; }
+            .dashboard-container { padding: 10px; }
+            .container { width: 95%; }
+            .lang-toggle { top: 10px; right: 10px; padding: 6px 12px; }
+        }
+
+        /* INTRO BOX */
+        .project-intro {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            border-top: 5px solid #3498db;
+        }
+        .project-intro h2 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        /* DASHBOARD CONTAINERS */
+        .dashboard-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        .dashboard-container h3 {
+            color: #2c3e50;
+            margin-top: 0;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* INSIGHT DESCRIPTIONS */
+        .dash-description {
+            background-color: #f8f9fa;
+            border-left: 4px solid #7f8c8d;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+        .dash-description ul {
+            margin-top: 10px;
+            margin-bottom: 0;
+            padding-left: 20px;
+        }
+        .dash-description li {
+            margin-bottom: 8px;
+        }
+
+        /* CALL TO ACTION */
+        .cta-section {
+            text-align: center;
+            background: #fff;
+            padding: 40px 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            border-top: 5px solid #2c3e50;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #2c3e50;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 10px 10px 0 10px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .cta-btn:hover { background: #3498db; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../game-delivery.html" class="lang-toggle">ES | Español</a>
+        <h1>Regional Analysis and Commercial Optimization</h1>
+        <p>Case Study: Game Delivery Retail Chain (USA)</p>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="btn-back">&#129124; Back to Portfolio</a>
+
+        <div class="mobile-warning">
+            <strong>Notice:</strong> This project contains high-density interactive dashboards. Desktop viewing is recommended to properly interact with spatial filters and tooltips.
+        </div>
+
+        <section class="project-intro">
+            <h2>Diagnostic Summary</h2>
+            
+            <div class="translation-notice">
+                <strong>Note on Localization:</strong> The interactive embedded dashboards retain their original Spanish layout. However, all structural insights, key metrics, and strategic recommendations are fully translated into English below each visualization.
+            </div>
+
+            <p>This Business Intelligence project analyzes the commercial performance of the "Game Delivery" retail chain in the US during **2022**. The main objective is to explain why certain branches and regions, despite achieving high billing volumes, yield very low net profits or even negative margins.</p>
+            <p>Through Exploratory Data Analysis (EDA) in Tableau, the approach transitions in stages: starting with a macro regional view, drilling down to the state level, and concluding with a precise diagnostic at the product and customer levels.</p>
+        </section>
+
+        <div class="dashboard-container">
+            <h3>1. Regional Profitability Analysis</h3>
+            
+            <div class="dash-description">
+                <p>Transactions are structured across four geographic regions (East, Central, West, and South), showcasing a radically disparate impact on the company's overall profitability.</p>
+                <strong>Key Findings:</strong>
+                <ul>
+                    <li><strong>National Volume:</strong> A total of 4,097 units were sold nationwide, generating a global net profit of $24,200.</li>
+                    <li><strong>Uneven Regional Performance:</strong> The West and East regions act as the financial engine of the company, concentrating 97% of net profits ($24,500 combined).</li>
+                    <li><strong>Critical Zones:</strong> As a counterweight, the Central region contributes only $1,412, while the South region operates at a financial loss (-$675), dragging down the global margin.</li>
+                    <li><strong>Lack of Seasonality:</strong> Sales do not exhibit clear seasonal peaks. Furthermore, there is a disconnect between revenue and margin: higher gross sales do not necessarily translate into an increase in net profits.</li>
+                    <li><strong>Impact of Discounts:</strong> It was proven that applying discounts does not increase the average number of units per ticket. On the contrary, they destroy the margin: sales with a discount of 30% or higher generate net losses.</li>
+                    <li><strong>Profitability by Category:</strong> The business model is sustained by "Games", followed by "Accessories". The "Consoles" segment, despite its high sales value, yields a marginal net profit of only $238.</li>
+                </ul>
+            </div>
+
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class='tableauPlaceholder' id='viz1774359661305' style='position: relative'>
+                    <noscript><a href='#'><img alt='Regional Profitability Analysis ' src='https://public.tableau.com/static/images/Re/RegionalProfitabilityAnalysis-GameStore/RegionalProfitabilityAnalysis/1_rss.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz'  style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='RegionalProfitabilityAnalysis-GameStore&#47;RegionalProfitabilityAnalysis' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Re/RegionalProfitabilityAnalysis-GameStore/RegionalProfitabilityAnalysis/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1774359661305');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    else { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <h3>2. State and Local Diagnostic</h3>
+            
+            <div class="dash-description">
+                <p>By performing a drill-down into the regions, the geographic analysis reveals that profits and losses are not evenly distributed, but rather heavily localized.</p>
+                <strong>Key Findings:</strong>
+                <ul>
+                    <li><strong>State Profit Hubs:</strong> California ($10,180) and New York ($7,110) largely lead the ranking, exceeding the profitability of the third place (Washington, $3,470) by two to three times.</li>
+                    <li><strong>State Loss Hubs:</strong> There are critical capital leaks in North Carolina (-$4,240), Texas (-$2,860), Tennessee (-$2,200), Pennsylvania (-$1,930), and Illinois (-$1,920).</li>
+                    <li><strong>Marginal Operational Volume:</strong> The vast majority of states recorded fewer than 100 units sold throughout the year, evidencing a very weak market penetration outside the main commercial hubs.</li>
+                    <li><strong>Root Cause of Losses:</strong> Initially, it might be assumed that shrinkage stems from logistical refunds or late shipments, but the data disproves this. The most extreme case occurs in Burlington (North Carolina) with accessory sales: products were delivered on time, but an average discount of 50% was applied. This confirms that losses are a direct consequence of <strong>destructive promotional policies</strong>.</li>
+                </ul>
+            </div>
+
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class='tableauPlaceholder' id='viz1774359687703' style='position: relative'>
+                    <noscript><a href='#'><img alt='State &amp; Local Profitability Analysis ' src='https://public.tableau.com/static/images/St/StateLocalProfitabilityAnalysis-GameStore/StateLocalProfitabilityAnalysis/1_rss.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz'  style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='StateLocalProfitabilityAnalysis-GameStore&#47;StateLocalProfitabilityAnalysis' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/St/StateLocalProfitabilityAnalysis-GameStore/StateLocalProfitabilityAnalysis/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1774359687703');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    else { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <h3>3. Customer & Product Performance</h3>
+            
+            <div class="dash-description">
+                <p>This dashboard crosses billing volume against actual profitability, identifying which products and customers sustain the business and which destroy value through a quadrant analysis:</p>
+                <strong>Key Findings:</strong>
+                <ul>
+                    <li><strong>Stars (Top Right):</strong> Above-average sales with positive margins. The "Games" segment dominates this quadrant, consolidating itself as the hard core of the company's profitability ($14.6K net).</li>
+                    <li><strong>Opportunities (Top Left):</strong> Transactions with an excellent margin but low sales volume. The strategic business decision here requires marketing campaigns to increase turnover without destroying the profit margin.</li>
+                    <li><strong>Dogs (Bottom Left):</strong> Low-volume sales with negative margins, candidates for discontinuation. A critical case is customer Nathan Cano: an unjustifiable 80% discount was granted, generating a net loss of -$2K on a small purchase volume.</li>
+                    <li><strong>Bleeders (Bottom Right):</strong> The highest risk quadrant. These are sales that drive massive revenue, but every transaction destroys capital. The "Keyboards" case stands out: they billed almost $20,000, but a commercial margin of -8% caused losses of -$1,570.</li>
+                </ul>
+            </div>
+
+            <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+                <div class='tableauPlaceholder' id='viz1774359704506' style='position: relative'>
+                    <noscript><a href='#'><img alt='Customer &amp; Product Performance ' src='https://public.tableau.com/static/images/Cu/CustomerProductPerformance-GameStore/CustomerProductPerformance/1_rss.png' style='border: none' /></a></noscript>
+                    <object class='tableauViz'  style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                        <param name='embed_code_version' value='3' /> 
+                        <param name='site_root' value='' />
+                        <param name='name' value='CustomerProductPerformance-GameStore&#47;CustomerProductPerformance' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/Cu/CustomerProductPerformance-GameStore/CustomerProductPerformance/1.png' /> 
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='es-ES' />
+                    </object>
+                </div>
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1774359704506');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    if ( divElement.offsetWidth > 800 ) { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    else if ( divElement.offsetWidth > 500 ) { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    else { vizElement.style.width='100%';vizElement.style.height='677px';} 
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+        </div>
+
+        <section class="project-intro" style="border-top: 5px solid #27ae60;">
+            <h2>Strategic Recommendations</h2>
+            <p>The descriptive and diagnostic analysis reveals that the current business model assumes unnecessary losses by prioritizing sales volume over margin. Based on the data, the following prescriptive guidelines are proposed:</p>
+            <ul>
+                <li><strong>Restructuring Discount Policies:</strong> It is imperative to prohibit or severely limit discounts equal to or greater than 30% across all product lines. The data mathematically demonstrates that the volume traction generated by these promotions fails to offset the destruction of the net margin.</li>
+                <li><strong>Geographical Focus (Top 10):</strong> Given the marginal operational volume in the vast majority of the country, it is suggested to reallocate the marketing and operations budget exclusively to the 10 most profitable states (led by California and New York). For states operating at a loss or with residual sales, transitioning to a strictly e-commerce model or divesting physical branches should be evaluated.</li>
+                <li><strong>Catalog Strategy ("Tied Selling"):</strong> Yielding a net margin of barely $238 against an extremely high billing volume, "Consoles" are not a profitable product on their own. It is recommended to strategically use them as a "Loss Leader", conditioning their discounts to bundle purchases with "Games" and "Accessories", which are the true engines of margin.</li>
+            </ul>
+        </section>
+        
+        <div class="cta-section">
+            <h3 style="color: #2c3e50;">Looking to identify and resolve inefficiencies with data?</h3>
+            <p style="color: #666; margin-bottom: 20px;">As an Industrial Engineer, I focus on diagnosing business models, optimizing commercial policies, and ensuring profitability through Business Intelligence.</p>
+            <a href="https://www.linkedin.com/in/tu-perfil-aqui" target="_blank" class="cta-btn">Connect on LinkedIn</a>
+            <a href="mailto:germanrein@gmail.com" class="cta-btn">Send Email</a>
+        </div>
+
+    </div>
+</body>
+</html>
